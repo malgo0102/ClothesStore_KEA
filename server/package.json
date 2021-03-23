@@ -1,0 +1,36 @@
+{
+  "name": "kea_shopping_cart",
+  "version": "1.0.0",
+  "description": "ShoppingCart backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint '**/*.js'",
+    "lint-watch": "nodemon --exec 'npm run lint --silent'",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MadaPas/ShoppingCart-KEA.git"
+  },
+  "keywords": [
+    "shopping",
+    "cart",
+    "products",
+    "users",
+    "shop"
+  ],
+  "author": "MadaPas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MadaPas/ShoppingCart-KEA/issues"
+  },
+  "homepage": "https://github.com/MadaPas/ShoppingCart-KEA#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint-config-salt": "^1.1.0"
+  }
+}
