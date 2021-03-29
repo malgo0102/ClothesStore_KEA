@@ -1,12 +1,8 @@
 const express = require('express');
-// const { v4: uuidv4 } = require('uuid');
-
-// const { User } = require('../db/user');
+const userRoutes = require('./user.js');
 
 const router = express.Router();
 
-router.get('/welcome', (req, res) => {
-  res.send('Our API is running...');
-});
+router.use('/users', userRoutes);
 
 module.exports = router;

@@ -5,7 +5,7 @@ const { connectDB } = require('./db/index');
 
 require('dotenv').config();
 
-const routes = require('./routes');
+const routes = require('./routes/index');
 
 const app = express();
 
