@@ -41,7 +41,6 @@ userSchema.methods.generateToken = () => {
 
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRE });
 };
-
 const User = mongoose.model('users', userSchema);
 
 module.exports.User = User;
