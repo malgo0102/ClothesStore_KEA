@@ -46,3 +46,4 @@ const registerUser = asyncHandler(async (req, res) => {
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUser = getUser;
+module.exports.registerUser = registerUser;
