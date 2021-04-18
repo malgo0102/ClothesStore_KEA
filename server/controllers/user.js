@@ -1,50 +1,54 @@
 /* eslint-disable no-console */
 const asyncHandler = require('express-async-handler');
 
-const { User } = require('../models/user');
+import sequelize from '../db/index';
 
-const getAllUsers = async (req, res) => {
-  await User.find({}, (err, users) => {
-    if (err) res.status(500).send(err);
-    res.status(200).json(users);
-  });
+const User = sequelize.models.User;
+
+export const getAllUsers = async (req, res) => {
+  await User.findAll()
+        .then(data => {
+          return res.status(200).json(data);
+        })
+        .catch(err => {
+          return res.send(err);
+        })
 };
 
-const getUser = (req, res) => {
+export const getUser = (req, res) => {
   if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
     return res.status(404).json('No user found');
   }
-  return User.findById(req.params.id, (err, user) => {
-    if (user.length === 0) {
-      return res.status(404).json('No user found');
-    }
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.status(200).json(user);
-  });
+  await User.findByPk(req.params.id)
+        .then(data => { 
+          return res.status(200).json(data);
+        })
+        .catch(err => {
+          if (err) {
+            return res.send(err);
+          }
+        })
 };
 
-const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+export const registerUser = asyncHandler(async (req, res) => {
 
-  const userExists = await User.findOne({ email });
+  await User.create(req.body)
+        .then(data => {
+          return res.json(data)
+        })
+        .catch(err => {
+          if (err) {
+            // check how error is display; user already exists?
+            return res.send(err);
+          }
+        })
 
-  if (userExists) {
-    return res.status(400).json('This user already exists.');
-    // throw new Error('User already exists.');
-  }
-
-  const user = await User.create({ name, email, password });
-
-  return res.status(201).json({
-    name: user.name,
-    email: user.email,
-    isAdmin: user.isAdmin,
-    token: user.generateToken(),
-  });
+        // 뭐?
+  // return res.status(201).json({
+  //   name: user.name,
+  //   email: user.email,
+  //   isAdmin: user.isAdmin,
+  //   token: user.generateToken(),
+  // });
 });
 
-module.exports.getAllUsers = getAllUsers;
-module.exports.getUser = getUser;
-module.exports.registerUser = registerUser;

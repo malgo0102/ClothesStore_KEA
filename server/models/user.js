@@ -1,46 +1,58 @@
 /* eslint-disable no-underscore-dangle */
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
+import sequelize from '../db/index';
+import { DATE, INTEGER, STRING } from 'sequelize';
 
-const userSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      select: false,
-    },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-  },
-  // {
-  //   timestamps: true, // createdAt. updatedAt
-  // },
-  {
-    versionKey: false, // https://stackoverflow.com/questions/12495891/what-is-the-v-field-in-mongoose
-  },
-);
+// Holds information about Users - stored into the sequelize object from our index.js
+export const UserModel = sequelize.define('User', {
+        role_id: {
+            type: INTEGER,
+            allowNull: false,
+            // defaultValue: 1, // if we want a default role
+        },
+        first_name: {
+            type: STRING,
+            allowNull: false,
+        },
+        last_name: {
+            type: STRING,
+            allowNull: false,
+        },
+        email: {
+            type: STRING,
+            allowNull: false,
+            unique: true,
+        },
+        password: {
+            type: STRING,
+            allowNull: false,
 
-userSchema.methods.generateToken = () => {
-  const { JWT_SECRET, JWT_EXPIRE } = process.env;
+            // hashing validation example - https://sequelize.org/master/manual/validations-and-constraints.html
+            // hashedPassword: {
+            //   type: DataTypes.STRING(64),
+            //   is: /^[0-9a-f]{64}$/i 
+        },
+        date_joined: {
+            type: DATE,
+        },
+        last_active: {
+            type: DATE,
+        },
+        
+    }, {
+    tableName: 'users', // which table to map the sequelize model object to
+    timestamps: false
+});
 
-  const payload = {
-    id: this._id,
-  };
+// Will delete later
+// const jwt = require('jsonwebtoken');
+// userSchema.methods.generateToken = () => {
+//   const { JWT_SECRET, JWT_EXPIRE } = process.env;
 
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRE });
-};
-const User = mongoose.model('users', userSchema);
+//   const payload = {
+//     id: this._id,
+//   };
 
-module.exports.User = User;
+//   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRE });
+// };
+// const User = mongoose.model('users', userSchema);
+

@@ -8,7 +8,7 @@ INSERT INTO products (brand_id, name, price, rating, description) VALUES
 
 INSERT INTO users (first_name, last_name, password, date_joined, last_active) VALUES
 ('', '', '', '', TIMESTAMP('2020-05-27 15:30'), TIMESTAMP('2020-05-27 15:30'), ''),
-('', '', '', '', TIMESTAMP('2020-05-27 15:45'),TIMESTAMP('2020-05-27 18:30'), '');
+('', '', '', '', TIMESTAMP('2020-05-27 15:45'), TIMESTAMP('2020-05-27 18:30'), '');
 
 INSERT INTO carts (user_id, time_stamp) VALUES
 (, TIMESTAMP('2020-06-24 18:30')),
