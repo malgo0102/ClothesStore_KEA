@@ -14,14 +14,6 @@ const sequelize = new Sequelize(DB, DB_USER, DB_PASS, {
     logging: false
 });
 
-sequelize.authenticate((err) => {
-    if (err) {
-      console.log(`Could not connect to database: ${db}`)
-      console.log(`Error: ${err}`)
-      process.exit(1);
-    }
-    console.log(`Successfully connected to database: ${db}`)
-});
 
 // sequelize assumes our tables have a primary key of id by default
 // when defining models with sequelize.define(model_name, {fields}, {options})

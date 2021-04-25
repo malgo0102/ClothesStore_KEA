@@ -1,0 +1,8 @@
+// configuration file for babel
+
+{
+    "presets": [
+        "env",
+        "stage-0" 
+    ]
+}

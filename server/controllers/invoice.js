@@ -21,7 +21,7 @@ const getAllInvoice = async (req, res) => {
   }
 };
 
-const getInvoice = (req, res) => {
+const getInvoice = async (req, res) => {
     try {
       if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         return res.status(404).json('Wrong invoice id format. Try again.');

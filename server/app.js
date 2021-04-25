@@ -2,7 +2,7 @@
 const express = require('express');
 // const bodyParser = require('body-parser'); // deprecated - https://stackoverflow.com/questions/24330014/bodyparser-is-deprecated-express-4
 const cors = require('cors');
-const { connectDB } = require('./db/index');
+import sequelize from'./db/index';
 
 require('dotenv').config();
 
@@ -18,8 +18,17 @@ app.get('/', (req, res) => {
   res.send('Our API is running...');
 });
 
+
 app.use('/api', routes);
 
-connectDB().then(async () => {
+
+
+sequelize.authenticate((err) => {
+  if (err) {
+    console.log(`Could not connect to database: ${db}`)
+    console.log(`Error: ${err}`)
+    process.exit(1);
+  }
+  console.log(`Successfully connected to database: ${db}`)
   app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
 });
