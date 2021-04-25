@@ -67,6 +67,16 @@ CREATE TABLE invoices(
         ON DELETE CASCADE
 );
 
+CREATE TABLE carts(
+  id INT(5) AUTO_INCREMENT NOT NULL UNIQUE,
+  user_id INT(5) NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
 CREATE TABLE cart_items (
   cart_id INT(11) NOT NULL,
   product_id INT(11) NOT NULL,
