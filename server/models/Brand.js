@@ -3,11 +3,14 @@ import sequelize from '../db/index';
 import { STRING } from 'sequelize';
 
 // Holds information about brands - stored into the sequelize object from our index.js
-const BrandModel = sequelize.define('Brand', {
+const Brand = sequelize.define('Brand', {
   name: {
     type: STRING,
     allowNull: false,
-    unique: true,
+    unique: {
+      args: 'name',
+      msg: 'The email is already taken!'
+   }
   },
   description: {
     type: STRING,
@@ -19,4 +22,4 @@ const BrandModel = sequelize.define('Brand', {
   timestamps: false,
 });
 
-export default BrandModel;
+export default Brand;

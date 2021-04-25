@@ -34,7 +34,7 @@ CREATE TABLE roles (
 
 CREATE TABLE users (
   id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
-  role_id(11) NOT NULL,
+  role_id INT(11) NOT NULL,
   first_name VARCHAR(120) NOT NULL,
   last_name VARCHAR(120) NOT NULL,
   password VARCHAR(120) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE carts(
 CREATE TABLE cart_items (
   cart_id INT(11) NOT NULL,
   product_id INT(11) NOT NULL,
-  invoice_id (INT(11) NOT NULL
+  invoice_id INT(11) NOT NULL,
   quantity INT(11) NOT NULL,
   unit_price FLOAT(11) NOT NULL,
 
@@ -107,4 +107,8 @@ CREATE TABLE favourite_products (
 );
 
 
-
+# Create new 'admin' user and grant CRUD privileges on all of our clothes_store tables
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY '11223344';
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON clothes_store.*
+TO admin@localhost;

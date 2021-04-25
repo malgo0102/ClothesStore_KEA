@@ -3,13 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const Favourite = sequelize.models.Favourite;
+import FavouriteProduct from '../models/FavouriteProduct.js';
 
 const getAllFavourites = async (req, res) => {
   try {
-    await Favourite.findAll()
+    await FavouriteProduct.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -27,14 +25,12 @@ const getFavourite = async (req, res) => {
       return res.status(404).json('Wrong favourite id format. Try again.');
     }
 
-    await Favourite.findByPk(req.params.id)
+    await FavouriteProduct.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -43,14 +39,12 @@ const getFavourite = async (req, res) => {
 
 const addFavourite = asyncHandler(async (req, res) => {
   try {
-    await Favourite.create(req.body)
+    await FavouriteProduct.create(req.body)
       .then(data => {
-        return res.json(data)
+        return res.status(200).json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -62,11 +56,17 @@ const deleteFavourite = async (req, res) => {
     if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
       return res.status(404).json('Wrong favourite id format. Try again.');
     }
-    await Favourite.destroy({
-      where: {
-        id: req.params.id
-      }
-    });
+    await FavouriteProduct.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(() => {
+        return res.status(200).json();
+      })
+      .catch(err => {
+        return res.send(err);
+      });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

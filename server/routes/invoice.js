@@ -4,7 +4,7 @@ const router = express.Router();
 
 const {
   getAllInvoices, getInvoice, addInvoice,
-} = require('../controllers/cardItem');
+} = require('../controllers/invoice');
 
 router.get('/', getAllInvoices);
 router.get('/:id', getInvoice);

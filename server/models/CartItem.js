@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { STRING, INTEGER, FLOAT } from 'sequelize';
 
 // Holds information about cart_items - stored into the sequelize object from our index.js
-const CartItemModel = sequelize.define('CartItem', {
+const CartItem = sequelize.define('CartItem', {
         cart_id: {
             type: INTEGER,
             allowNull: false,
@@ -28,4 +28,4 @@ const CartItemModel = sequelize.define('CartItem', {
     timestamps: false
 });
 
-export default CartItemModel;
+export default CartItem;

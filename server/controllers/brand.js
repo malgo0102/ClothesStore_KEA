@@ -3,13 +3,12 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const Brand = sequelize.models.Brand;
+import Brand from '../models/Brand.js';
 
 const getAllBrands = async (req, res) => {
+  
   try {
-    await Brand.findAll()
+    Brand.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -17,7 +16,7 @@ const getAllBrands = async (req, res) => {
         return res.send(err);
       });
   } catch (err) {
-    return res.status(500).json('Internal server error');
+    return res.status(500).json('Internal server error: ' + err);
   }
 };
 
@@ -31,9 +30,7 @@ const getBrand = async (req, res) => {
         return res.status(200).json(data);
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -47,9 +44,8 @@ const addBrand = asyncHandler(async (req, res) => {
         return res.json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        console.log(err);
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -62,14 +58,12 @@ const updateBrand = async (req, res) => {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
     await Brand.update(req.body, {
-      where: {
-        id: req.params.id
-      }
-    })
-    .catch(err => {
-      if (err) {
-        return res.send(err);
-      }
+        where: {
+          id: req.params.id
+        }
+      })
+      .catch(err => {
+    return res.send(err);
     });
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -82,10 +76,10 @@ const deleteBrand = async (req, res) => {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
     await Brand.destroy({
-      where: {
-        id: req.params.id
-      }
-    });
+        where: {
+          id: req.params.id
+        }
+      });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

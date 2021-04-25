@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import sequelize from '../db/index';
-import { INTEGER } from 'sequelize';
+import { INTEGER, STRING } from 'sequelize';
 
 // Holds information about invoices - stored into the sequelize object from our index.js
-const FavouriteProductModel = sequelize.define('FavouriteProduct', {
+const FavouriteProduct = sequelize.define('FavouriteProduct', {
     product_id: {
             type: INTEGER,
             allowNull: false,
@@ -17,4 +17,4 @@ const FavouriteProductModel = sequelize.define('FavouriteProduct', {
     timestamps: false
 });
 
-export default FavouriteProductModel;
+export default FavouriteProduct;

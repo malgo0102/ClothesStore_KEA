@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const User = sequelize.models.User;
+import User from '../models/User.js';
 
 export const getAllUsers = async (req, res) => {
   await User.findAll()
@@ -24,9 +22,7 @@ export const getUser = async (req, res) => {
           return res.status(200).json(data);
         })
         .catch(err => {
-          if (err) {
-            return res.send(err);
-          }
+          return res.send(err);
         })
 };
 
@@ -37,10 +33,8 @@ export const registerUser = asyncHandler(async (req, res) => {
           return res.json(data)
         })
         .catch(err => {
-          if (err) {
-            // check how error is display; user already exists?
-            return res.send(err);
-          }
+          // check how error is display; user already exists?
+          return res.send(err);
         })
 
         // 뭐?

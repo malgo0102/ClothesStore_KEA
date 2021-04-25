@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-const express = require('express');
-// const bodyParser = require('body-parser'); // deprecated - https://stackoverflow.com/questions/24330014/bodyparser-is-deprecated-express-4
-const cors = require('cors');
-import sequelize from'./db/index';
-
 require('dotenv').config();
+const { sequelize } = require('./db/index');
+const express = require('express');
+const cors = require('cors');
+// const bodyParser = require('body-parser'); // deprecated - https://stackoverflow.com/questions/24330014/bodyparser-is-deprecated-express-4
+
 
 const routes = require('./routes/index');
 
@@ -23,12 +23,5 @@ app.use('/api', routes);
 
 
 
-sequelize.authenticate((err) => {
-  if (err) {
-    console.log(`Could not connect to database: ${db}`)
-    console.log(`Error: ${err}`)
-    process.exit(1);
-  }
-  console.log(`Successfully connected to database: ${db}`)
-  app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
-});
+
+app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));

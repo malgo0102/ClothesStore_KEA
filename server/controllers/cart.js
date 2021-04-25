@@ -3,9 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const Cart = sequelize.models.Cart;
+import Cart from '../models/Cart.js';
 
 const getAllCarts = async (req, res) => {
   try {
@@ -32,9 +30,7 @@ const getCart = async (req, res) => {
         return res.status(200).json(data);
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -45,12 +41,10 @@ const addCart = asyncHandler(async (req, res) => {
   try {
     await Cart.create(req.body)
       .then(data => {
-        return res.json(data)
+        return res.status(200).json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');

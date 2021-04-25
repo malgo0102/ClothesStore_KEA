@@ -3,19 +3,17 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const Product = sequelize.models.Product;
+import Product from '../models/Product.js';
 
 const getAllProducts = async (req, res) => {
     try {
         await Product.findAll()
-        .then(data => {
-            return res.status(200).json(data);
-        })
-        .catch(err => {
-            return res.send(err);
-        });
+            .then(data => {
+                return res.status(200).json(data);
+            })
+            .catch(err => {
+                return res.send(err);
+            });
     } catch (err) {
         return res.status(500).json('Internal server error');
     }
@@ -32,9 +30,7 @@ const getProduct = async (req, res) => {
                 return res.status(200).json(data);
             })
             .catch(err => {
-                if (err) {
-                    return res.send(err);
-                }
+                return res.send(err);
             })
     } catch (err) {
         return res.status(500).json('Internal server error');
@@ -48,9 +44,7 @@ const addProduct = asyncHandler(async (req, res) => {
                 return res.json(data)
             })
             .catch(err => {
-                if (err) {
-                    return res.send(err);
-                }
+                return res.send(err);
             })
     } catch (err) {
         return res.status(500).json('Internal server error');
@@ -63,15 +57,16 @@ const updateProduct = async (req, res) => {
       return res.status(404).json('Wrong product id format. Try again.');
     }
     await Product.update(req.body, {
-        where: {
-            id: req.params.id
-        }
-    })
-    .catch(err => {
-        if (err) {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(() => {
+            return res.status(200).json();
+        })
+        .catch(err => {
             return res.send(err);
-        }
-    });
+        });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -86,6 +81,12 @@ const deleteProduct = async (req, res) => {
         where: {
             id: req.params.id
         }
+    })
+    .then(() => {
+        return res.status(200).json();
+    })
+    .catch(err => {
+        return res.send(err);
     });
   } catch (err) {
     return res.status(500).json('Internal server error');

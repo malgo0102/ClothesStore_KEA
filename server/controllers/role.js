@@ -3,9 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const Role = sequelize.models.Role;
+import Role from '../models/Role.js';
 
 const getAllRoles = async (req, res) => {
   try {
@@ -32,9 +30,7 @@ const getRole = async (req, res) => {
         return res.status(200).json(data);
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -48,9 +44,7 @@ const addRole = asyncHandler(async (req, res) => {
         return res.json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -63,15 +57,15 @@ const updateRole = async (req, res) => {
       return res.status(404).json('Wrong role id format. Try again.');
     }
     await Role.update(req.body, {
-      where: {
-        id: req.params.id
-      }
-    })
-    .catch(err => {
-      if (err) {
+        where: {
+          id: req.params.id
+        }
+      }).then(() => {
+        return res.status(200).json();
+      })
+      .catch(err => {
         return res.send(err);
-      }
-    });
+      });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -83,10 +77,15 @@ const deleteRole = async (req, res) => {
       return res.status(404).json('Wrong role id format. Try again.');
     }
     await Role.destroy({
-      where: {
-        id: req.params.id
-      }
-    });
+        where: {
+          id: req.params.id
+        }
+      }).then(() => {
+        return res.status(200).json();
+      })
+      .catch(err => {
+        return res.send(err);
+      });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

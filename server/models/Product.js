@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { INTEGER, STRING, FLOAT } from 'sequelize';
 
 // Holds information about products - stored into the sequelize object from our index.js
-const ProductModel = sequelize.define('Product', {
+const Product = sequelize.define('Product', {
         brand_id: {
             type: INTEGER,
             allowNull: false,
@@ -34,4 +34,4 @@ const ProductModel = sequelize.define('Product', {
     timestamps: false
 });
 
-export default ProductModel;
+export default Product;

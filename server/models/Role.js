@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { STRING } from 'sequelize';
 
 // Holds information about roles - stored into the sequelize object from our index.js
-const RoleModel = sequelize.define('Role', {
+const Role = sequelize.define('Role', {
         name: {
             type: STRING,
             allowNull: false,
@@ -14,4 +14,4 @@ const RoleModel = sequelize.define('Role', {
     timestamps: false
 });
 
-export default RoleModel;
+export default Role;

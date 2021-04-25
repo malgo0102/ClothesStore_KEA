@@ -3,11 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getAllCartItems, getCartItem, addCartItem,
-} = require('../controllers/cardItem');
+  getAllCartItems, addCartItem,
+} = require('../controllers/cartItem');
 
 router.get('/', getAllCartItems);
-router.get('/:id', getCartItem);
 router.post('/', addCartItem);
 
 module.exports = router;

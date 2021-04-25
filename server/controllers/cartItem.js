@@ -3,11 +3,9 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
+import CartItem from '../models/CartItem.js';
 
-const CartItem = sequelize.models.CartItem;
-
-const getAllCartsItem = async (req, res) => {
+const getAllCartItems = async (req, res) => {
   try {
     await CartItem.findAll()
       .then(data => {
@@ -26,12 +24,10 @@ const addCartItem = asyncHandler(async (req, res) => {
   try {
     await Cart.create(req.body)
       .then(data => {
-        return res.json(data)
+        return res.status(200).json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -39,6 +35,6 @@ const addCartItem = asyncHandler(async (req, res) => {
 });
 
 
-module.exports.getAllCartsItem = getAllCartsItem;
+module.exports.getAllCartItems = getAllCartItems;
 module.exports.addCartItem = addCartItem;
 

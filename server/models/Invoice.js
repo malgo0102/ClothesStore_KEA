@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { STRING, INTEGER, FLOAT, DATE } from 'sequelize';
 
 // Holds information about invoices - stored into the sequelize object from our index.js
-const InvoiceModel = sequelize.define('Invoice', {
+const Invoice = sequelize.define('Invoice', {
         card_type_id: {
             type: INTEGER,
             allowNull: false,
@@ -28,4 +28,4 @@ const InvoiceModel = sequelize.define('Invoice', {
     timestamps: false
 });
 
-export default InvoiceModel;
+export default Invoice;

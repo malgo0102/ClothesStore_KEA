@@ -3,9 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
-
-const CardType = sequelize.models.CardType;
+import CardType from '../models/CardType.js';
 
 const getAllCardTypes = async (req, res) => {
   try {
@@ -32,9 +30,7 @@ const getCardType = async (req, res) => {
         return res.status(200).json(data);
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -48,9 +44,7 @@ const addCardType = asyncHandler(async (req, res) => {
         return res.json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -67,10 +61,11 @@ const updateCardType = async (req, res) => {
         id: req.params.id
       }
     })
+    .then(() => {
+      return res.status(200).json();
+    })
     .catch(err => {
-      if (err) {
-        return res.send(err);
-      }
+      return res.send(err);
     });
   } catch (err) {
     return res.status(500).json('Internal server error');
@@ -86,6 +81,12 @@ const deleteCardType = async (req, res) => {
       where: {
         id: req.params.id
       }
+    })
+    .then(() => {
+      return res.status(200).json();
+    })
+    .catch(err => {
+      return res.send(err);
     });
   } catch (err) {
     return res.status(500).json('Internal server error');

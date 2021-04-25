@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { STRING } from 'sequelize';
 
 // Holds information about card_types - stored into the sequelize object from our index.js
-const CardTypeModel = sequelize.define('CardType', {
+const CardType = sequelize.define('CardType', {
         names: {
             type: String,
             allowNull: false,
@@ -14,4 +14,4 @@ const CardTypeModel = sequelize.define('CardType', {
     timestamps: false
 });
 
-export default CardTypeModel;
+export default CardType;

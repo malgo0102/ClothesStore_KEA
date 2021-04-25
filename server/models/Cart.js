@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { INTEGER, DATE } from 'sequelize';
 
 // Holds information about carts - stored into the sequelize object from our index.js
-const CartModel = sequelize.define('Cart', {
+const Cart = sequelize.define('Cart', {
         user_id: {
             type: INTEGER,
             allowNull: false,
@@ -16,4 +16,4 @@ const CartModel = sequelize.define('Cart', {
     timestamps: false
 });
 
-export default CartModel;
+export default Cart;

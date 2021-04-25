@@ -3,11 +3,9 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import sequelize from '../db/index';
+import Invoice from '../models/Invoice.js';
 
-const Invoice = sequelize.models.Invoice;
-
-const getAllInvoice = async (req, res) => {
+const getAllInvoices = async (req, res) => {
   try {
     await Invoice.findAll()
       .then(data => {
@@ -32,9 +30,7 @@ const getInvoice = async (req, res) => {
           return res.status(200).json(data);
         })
         .catch(err => {
-          if (err) {
-            return res.send(err);
-          }
+          return res.send(err);
         })
     } catch (err) {
       return res.status(500).json('Internal server error');
@@ -46,20 +42,19 @@ const addInvoice = asyncHandler(async (req, res) => {
   try {
     await Cart.create(req.body)
       .then(data => {
-        return res.json(data)
+        return res.status(200).json(data)
       })
       .catch(err => {
-        if (err) {
-          return res.send(err);
-        }
+        return res.send(err);
       })
+      
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
 });
 
 
-module.exports.getAllInvoice = getAllInvoice;
+module.exports.getAllInvoices = getAllInvoices;
 module.exports.getInvoice = getInvoice;
 module.exports.addInvoice = addInvoice;
 

@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 import { DATE, INTEGER, STRING } from 'sequelize';
 
 // Holds information about Users - stored into the sequelize object from our index.js
-const UserModel = sequelize.define('User', {
+const User = sequelize.define('User', {
         role_id: {
             type: INTEGER,
             allowNull: false,
@@ -43,7 +43,7 @@ const UserModel = sequelize.define('User', {
     timestamps: false
 });
 
-export default UserModel;
+export default User;
 
 // Will delete later
 // const jwt = require('jsonwebtoken');
