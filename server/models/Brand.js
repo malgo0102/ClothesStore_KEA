@@ -9,7 +9,7 @@ const Brand = sequelize.define('Brand', {
     allowNull: false,
     unique: {
       args: 'name',
-      msg: 'The email is already taken!'
+      msg: 'This name is already taken!'
    }
   },
   description: {

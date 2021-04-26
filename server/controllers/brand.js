@@ -6,7 +6,7 @@ const asyncHandler = require('express-async-handler');
 import Brand from '../models/Brand.js';
 
 const getAllBrands = async (req, res) => {
-  
+
   try {
     Brand.findAll()
       .then(data => {
@@ -52,6 +52,8 @@ const addBrand = asyncHandler(async (req, res) => {
   }
 });
 
+
+// TO-DO: change regex expression
 const updateBrand = async (req, res) => {
   try {
     if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
