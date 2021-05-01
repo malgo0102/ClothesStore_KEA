@@ -11,12 +11,12 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 - create .env file under server directory
 
 **.env file contents**
-DB={name}
-DB_HOST={host} (e.g., localhost)
-DB_USER={user} (e.g., admin or root, etc.)
-DB_PASS={password}
-DB_DIALECT={database_dialect} (e.g., mysql or postgres)
-PORT={port} (e.g. we use 8080)
+- DB={name}
+- DB_HOST={host} (e.g., localhost)
+- DB_USER={user} (e.g., admin or root, etc.)
+- DB_PASS={password}
+- DB_DIALECT={database_dialect} (e.g., mysql or postgres)
+- PORT={port} (e.g. we use 8080)
 
 **Creating database**
 1. create_clothes_store_db.sql: Contains all scripts to create new database and add a new user to it
