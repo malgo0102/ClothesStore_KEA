@@ -36,15 +36,16 @@ PORT={port} (e.g. we use 8080)
 
 **Data to use with Postman to sign in**
 1. POST a new user to the API route http://localhost:8080/api/users
-    {
+    - {
         "role_id": 3,
         "first_name": "new",
         "last_name": "user",
         "email": "newuser@gmail.com",
         "password": "newpass"
-    }
+       }
+    
 2. POST sign in credentials to sign in with the new user at http://localhost:8080/api/users/signin
-    {
+    - {
         "email": "newuser@gmail.com",
         "password": "newpass"
-    }
+       }   
