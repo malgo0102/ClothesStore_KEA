@@ -22,7 +22,7 @@ const getAllBrands = async (req, res) => {
 
 const getBrand = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
     await Brand.findByPk(req.params.id)
@@ -56,7 +56,7 @@ const addBrand = asyncHandler(async (req, res) => {
 // TO-DO: change regex expression
 const updateBrand = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
     await Brand.update(req.body, {
@@ -74,7 +74,7 @@ const updateBrand = async (req, res) => {
 
 const deleteBrand = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
     await Brand.destroy({

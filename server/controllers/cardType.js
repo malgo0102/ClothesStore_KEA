@@ -21,7 +21,7 @@ const getAllCardTypes = async (req, res) => {
 
 const getCardType = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong card type id format. Try again.');
     }
 
@@ -53,7 +53,7 @@ const addCardType = asyncHandler(async (req, res) => {
 
 const updateCardType = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong card type id format. Try again.');
     }
     await CardType.update(req.body, {
@@ -74,7 +74,7 @@ const updateCardType = async (req, res) => {
 
 const deleteCardType = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong role id format. Try again.');
     }
     await CardType.destroy({

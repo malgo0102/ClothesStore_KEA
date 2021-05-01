@@ -18,4 +18,4 @@ app.get('/', (req, res) => {
 
 app.use('/api', routes);
 
-app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
+app.listen(process.env.PORT, () => console.log(`API server listening on http://localhost:${process.env.PORT}`));

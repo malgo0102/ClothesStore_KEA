@@ -21,7 +21,7 @@ const getAllProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
     try {
-        if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+        if (!req.params.id.match(/^[0-9]*$/)) {
         return res.status(404).json('Wrong product id format. Try again.');
         }
 
@@ -53,7 +53,7 @@ const addProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong product id format. Try again.');
     }
     await Product.update(req.body, {
@@ -74,7 +74,7 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong product id format. Try again.');
     }
     await Product.destroy({

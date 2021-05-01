@@ -21,7 +21,7 @@ const getAllCarts = async (req, res) => {
 
 const getCart = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong cart id format. Try again.');
     }
 
