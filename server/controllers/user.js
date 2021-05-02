@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
+import User from '../models/User.js';
+
 const asyncHandler = require('express-async-handler');
 const jwt = require("jsonwebtoken"); // implementation pending
 const bcrypt = require("bcryptjs");
-
-import User from '../models/User.js';
 
 export const getAllUsers = async (req, res) => {
   try {
