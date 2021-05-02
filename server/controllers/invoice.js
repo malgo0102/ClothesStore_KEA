@@ -1,9 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
+import sequelize from "../db";
+
 const asyncHandler = require('express-async-handler');
 
 import Invoice from '../models/Invoice.js';
+import Cart from "../models/Cart";
+import CartItem from "../models/CartItem";
 
 const getAllInvoices = async (req, res) => {
   try {
@@ -24,9 +28,9 @@ const getInvoice = async (req, res) => {
       if (!req.params.id.match(/^[0-9]*$/)) {
         return res.status(404).json('Wrong invoice id format. Try again.');
       }
-  
+
       await Invoice.findByPk(req.params.id)
-        .then(data => { 
+        .then(data => {
           return res.status(200).json(data);
         })
         .catch(err => {
@@ -37,21 +41,40 @@ const getInvoice = async (req, res) => {
     }
   };
 
+// Unmanaged transactions: https://sequelize.org/master/manual/transactions.html
 
 const addInvoice = asyncHandler(async (req, res) => {
+    const t = await sequelize.transaction();
   try {
-    await Cart.create(req.body)
-      .then(data => {
-        return res.status(200).json(data)
-      })
-      .catch(err => {
-        return res.send(err);
-      })
-      
+    //const cart = await Cart.create(req.body.cart, { transaction: t });
+    const invoice = await Invoice.create(req.body.invoice, { transaction: t });
+    // const cart_items = await CartItem.create(req.body.cart_items, { transaction: t });
+
+    await t.commit().then(() => {
+        return res.status(200);
+    });
+
   } catch (err) {
-    return res.status(500).json('Internal server error');
+      await t.rollback().then(() => {
+          return res.status(500).json('Internal server error: ' + err);
+      });
   }
 });
+
+// const addInvoice = asyncHandler(async (req, res) => {
+//   try {
+//     await Invoice.create(req.body)
+//       .then(data => {
+//         return res.status(200).json(data)
+//       })
+//       .catch(err => {
+//         return res.send(err);
+//       })
+//
+//   } catch (err) {
+//     return res.status(500).json('Internal server error');
+//   }
+// });
 
 
 module.exports.getAllInvoices = getAllInvoices;
