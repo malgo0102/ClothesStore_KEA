@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import User from '../models/User.js';
+import User from '../db/db.config';
+import { verifyNewUser, verifySignUp }  from '../middlewares/authVerification';
 
 const asyncHandler = require('express-async-handler');
 const jwt = require("jsonwebtoken"); // implementation pending
@@ -38,6 +39,9 @@ export const getUser = async (req, res) => {
 
 export const registerUser = asyncHandler(async (req, res) => {
   try {
+    if (verifyNewUser(req.body)) {
+      return res.status(409).send('User already exists!'); 
+    }
     const newUser = {
       role_id: req.body.role_id,
       first_name: req.body.first_name, 
@@ -59,21 +63,11 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 export const signInUser = asyncHandler(async (req, res)  => {
   try {
-      User.findOne({
-          where: {
-              email: req.body.email
-          }
-      })
-      .then(data => { 
-          if(bcrypt.compareSync(req.body.password, data.password)) {
-            return res.status(200).json(data)
-          } else {
-            return res.status(401).send("Unauthorized user, credentials do not match!");
-          }
-      })
-      .catch(err => {
-        return res.status(404).send(err);
-      })
+    if(verifySignUp(req.body)) {
+      return res.status(401).send("Unauthorized user, credentials do not match!");
+      
+    }
+    return res.status(200).json(req.body)
   } catch (err) {
     console.log(err);
     return res.status(500).json('Internal server error');

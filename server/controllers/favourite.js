@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import FavouriteProduct from '../models/FavouriteProduct.js';
+import FavouriteProduct from '../db/db.config';
 
 const getAllFavourites = async (req, res) => {
   try {

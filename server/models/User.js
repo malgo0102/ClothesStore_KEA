@@ -7,7 +7,7 @@ const User = sequelize.define('User', {
         role_id: {
             type: INTEGER,
             allowNull: false,
-            // defaultValue: 1, // if we want a default role
+            // defaultValue: 1, // if we want a default role?
         },
         first_name: {
             type: STRING,
@@ -25,11 +25,6 @@ const User = sequelize.define('User', {
         password: {
             type: STRING,
             allowNull: false,
-
-            // hashing validation example - https://sequelize.org/master/manual/validations-and-constraints.html
-            // hashedPassword: {
-            //   type: DataTypes.STRING(64),
-            //   is: /^[0-9a-f]{64}$/i 
         },
         date_joined: {
             type: DATE,
@@ -37,7 +32,6 @@ const User = sequelize.define('User', {
         last_active: {
             type: DATE,
         },
-        
     }, {
     tableName: 'users', // which table to map the sequelize model object to
     timestamps: false
@@ -45,7 +39,7 @@ const User = sequelize.define('User', {
 
 export default User;
 
-// Will delete later
+// Will delete later after figuring out JWT Authentication
 // const jwt = require('jsonwebtoken');
 // userSchema.methods.generateToken = () => {
 //   const { JWT_SECRET, JWT_EXPIRE } = process.env;

@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import CardType from '../models/CardType.js';
+import CardType from '../db/db.config';
 
 const getAllCardTypes = async (req, res) => {
   try {

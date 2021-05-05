@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Product from '../models/Product.js';
+import Product from '../db/db.config';
 
 const getAllProducts = async (req, res) => {
     try {

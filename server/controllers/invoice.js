@@ -1,13 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
-import sequelize from "../db";
-
 const asyncHandler = require('express-async-handler');
 
-import Invoice from '../models/Invoice.js';
-import Cart from "../models/Cart";
-import CartItem from "../models/CartItem";
+import { Invoice, Cart, CartItem, Sequelize } from '../db/db.config';
+
 
 const getAllInvoices = async (req, res) => {
   try {
@@ -44,7 +41,7 @@ const getInvoice = async (req, res) => {
 // Unmanaged transactions: https://sequelize.org/master/manual/transactions.html
 
 const addInvoice = asyncHandler(async (req, res) => {
-    const t = await sequelize.transaction();
+    const t = await Sequelize.transaction();
   try {
     //const cart = await Cart.create(req.body.cart, { transaction: t });
     const invoice = await Invoice.create(req.body.invoice, { transaction: t });

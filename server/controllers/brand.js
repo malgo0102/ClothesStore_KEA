@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Brand from '../models/Brand.js';
+import Brand from '../db/db.config';
 
 const getAllBrands = async (req, res) => {
 

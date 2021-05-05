@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Cart from '../models/Cart.js';
+import Cart from '../db/db.config';
 
 const getAllCarts = async (req, res) => {
   try {

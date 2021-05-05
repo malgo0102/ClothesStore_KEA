@@ -24,7 +24,7 @@ sequelize.authenticate((err) => {
   });
 
 
-// sequelize assumes our tables have a primary key of id by default
+// Sequelize assumes our tables have a primary key of id by default
 // when defining models with sequelize.define(model_name, {fields}, {options})
 export default sequelize;
 

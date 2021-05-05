@@ -3,7 +3,7 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Role from '../models/Role.js';
+import Role from '../db/db.config';
 
 const getAllRoles = async (req, res) => {
   try {
