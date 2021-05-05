@@ -23,7 +23,7 @@ const verifySignUp = (user) => {
 
 // Checks if new User does not already exists (email field in users table is unique)
 const verifyNewUser = (user) => {
-    await User.findOne({
+    User.findOne({
             where: {
                 email: user.email
             }
