@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import dbConfig from '../db/db.config';
-import { verifyNewUser, verifySignUp }  from '../middlewares/authVerification';
+import { verifyNewUser }  from '../middlewares/authVerification';
 
 const asyncHandler = require('express-async-handler');
 const jwt = require("jsonwebtoken"); // implementation pending
@@ -64,11 +64,21 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 export const signInUser = asyncHandler(async (req, res)  => {
   try {
-    if(verifySignUp(req.body)) {
-      return res.status(401).send("Unauthorized user, credentials do not match!");
-      
-    }
-    return res.status(200).json(req.body)
+    dbConfig.User.findOne({
+      where: {
+          email: user.email
+      }
+  })
+  .then(data => { 
+      if(bcrypt.compareSync(user.password, data.password)) {
+        return res.status(200).json(data)
+      } else {
+        return res.status(401).send("Unauthorized user, credentials do not match!");
+      }
+  })
+  .catch(err => {
+    return res.status(404).send(err);
+  })
   } catch (err) {
     console.log(err);
     return res.status(500).json('Internal server error');

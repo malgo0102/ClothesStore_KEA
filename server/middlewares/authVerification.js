@@ -2,23 +2,9 @@ import dbConfig from '../db/db.config';
 
 var bcrypt = require("bcryptjs");
 
-// Checks if a User credentials match
+// Checks if a User credentials match - Probably don't need
 const verifySignUp = (user) => {
-    dbConfig.User.findOne({
-            where: {
-                email: user.email
-            }
-        })
-        .then(data => { 
-            if(bcrypt.compareSync(user.password, data.password)) {
-                return true;
-            } else {
-                return false;
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
+
 }
 
 // Checks if new User does not already exists (email field in users table is unique)
