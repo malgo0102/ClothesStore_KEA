@@ -3,11 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Cart from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllCarts = async (req, res) => {
   try {
-    await Cart.findAll()
+    await dbConfig.Cart.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -25,7 +25,7 @@ const getCart = async (req, res) => {
       return res.status(404).json('Wrong cart id format. Try again.');
     }
 
-    await Cart.findByPk(req.params.id)
+    await dbConfig.Cart.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
       })
@@ -39,7 +39,7 @@ const getCart = async (req, res) => {
 
 const addCart = asyncHandler(async (req, res) => {
   try {
-    await Cart.create(req.body)
+    await dbConfig.Cart.create(req.body)
       .then(data => {
         return res.status(200).json(data)
       })

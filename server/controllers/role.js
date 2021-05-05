@@ -3,11 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Role from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllRoles = async (req, res) => {
   try {
-    await Role.findAll()
+    await dbConfig.Role.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -25,7 +25,7 @@ const getRole = async (req, res) => {
       return res.status(404).json('Wrong role id format. Try again.');
     }
 
-    await Role.findByPk(req.params.id)
+    await dbConfig.Role.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
       })
@@ -39,7 +39,7 @@ const getRole = async (req, res) => {
 
 const addRole = asyncHandler(async (req, res) => {
   try {
-    await Role.create(req.body)
+    await dbConfig.Role.create(req.body)
       .then(data => {
         return res.json(data)
       })
@@ -56,7 +56,7 @@ const updateRole = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong role id format. Try again.');
     }
-    await Role.update(req.body, {
+    await dbConfig.Role.update(req.body, {
         where: {
           id: req.params.id
         }
@@ -76,7 +76,7 @@ const deleteRole = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong role id format. Try again.');
     }
-    await Role.destroy({
+    await dbConfig.Role.destroy({
         where: {
           id: req.params.id
         }

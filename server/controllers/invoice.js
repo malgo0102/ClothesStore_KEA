@@ -3,12 +3,12 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import { Invoice, Cart, CartItem, Sequelize } from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 
 const getAllInvoices = async (req, res) => {
   try {
-    await Invoice.findAll()
+    await dbConfig.Invoice.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -26,7 +26,7 @@ const getInvoice = async (req, res) => {
         return res.status(404).json('Wrong invoice id format. Try again.');
       }
 
-      await Invoice.findByPk(req.params.id)
+      await dbConfig.Invoice.findByPk(req.params.id)
         .then(data => {
           return res.status(200).json(data);
         })
@@ -41,11 +41,11 @@ const getInvoice = async (req, res) => {
 // Unmanaged transactions: https://sequelize.org/master/manual/transactions.html
 
 const addInvoice = asyncHandler(async (req, res) => {
-    const t = await Sequelize.transaction();
+    const t = await dbConfig.Sequelize.transaction();
   try {
-    //const cart = await Cart.create(req.body.cart, { transaction: t });
+    //const cart = await dbConfig.Cart.create(req.body.cart, { transaction: t });
     const invoice = await Invoice.create(req.body.invoice, { transaction: t });
-    // const cart_items = await CartItem.create(req.body.cart_items, { transaction: t });
+    // const cart_items = await dbConfig.CartItem.create(req.body.cart_items, { transaction: t });
 
     await t.commit().then(() => {
         return res.status(200);
@@ -60,7 +60,7 @@ const addInvoice = asyncHandler(async (req, res) => {
 
 // const addInvoice = asyncHandler(async (req, res) => {
 //   try {
-//     await Invoice.create(req.body)
+//     await dbConfig.Invoice.create(req.body)
 //       .then(data => {
 //         return res.status(200).json(data)
 //       })

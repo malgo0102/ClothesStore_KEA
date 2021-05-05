@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import User from '../db/db.config';
+import dbConfig from '../db/db.config';
 import { verifyNewUser, verifySignUp }  from '../middlewares/authVerification';
 
 const asyncHandler = require('express-async-handler');
@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 
 export const getAllUsers = async (req, res) => {
   try {
-    await User.findAll()
+    await dbConfig.User.findAll()
           .then(data => {
             return res.status(200).json(data);
           })
@@ -16,6 +16,7 @@ export const getAllUsers = async (req, res) => {
             return res.status(404).send(err);
           })
   } catch (err) {
+    console.log(err);
     return res.status(500).json('Internal server error');
   }
 };
@@ -25,7 +26,7 @@ export const getUser = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('No user found');
     }
-    await User.findByPk(req.params.id)
+    await dbConfig.User.findByPk(req.params.id)
           .then(data => { 
             return res.status(200).json(data);
           })
@@ -49,7 +50,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
     }
-    await User.create(newUser)
+    await dbConfig.User.create(newUser)
           .then(data => {
             return res.json(data)
           })

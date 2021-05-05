@@ -3,11 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import FavouriteProduct from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllFavourites = async (req, res) => {
   try {
-    await FavouriteProduct.findAll()
+    await dbConfig.FavouriteProduct.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -25,7 +25,7 @@ const getFavourite = async (req, res) => {
       return res.status(404).json('Wrong favourite id format. Try again.');
     }
 
-    await FavouriteProduct.findByPk(req.params.id)
+    await dbConfig.FavouriteProduct.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
       })
@@ -39,7 +39,7 @@ const getFavourite = async (req, res) => {
 
 const addFavourite = asyncHandler(async (req, res) => {
   try {
-    await FavouriteProduct.create(req.body)
+    await dbConfig.FavouriteProduct.create(req.body)
       .then(data => {
         return res.status(200).json(data)
       })
@@ -56,7 +56,7 @@ const deleteFavourite = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong favourite id format. Try again.');
     }
-    await FavouriteProduct.destroy({
+    await dbConfig.FavouriteProduct.destroy({
         where: {
           id: req.params.id
         }

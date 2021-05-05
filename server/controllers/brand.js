@@ -3,12 +3,12 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Brand from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllBrands = async (req, res) => {
 
   try {
-    Brand.findAll()
+    dbConfig.Brand.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -25,7 +25,7 @@ const getBrand = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
-    await Brand.findByPk(req.params.id)
+    await dbConfig.Brand.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
       })
@@ -39,7 +39,7 @@ const getBrand = async (req, res) => {
 
 const addBrand = asyncHandler(async (req, res) => {
   try {
-    await Brand.create(req.body)
+    await dbConfig.Brand.create(req.body)
       .then(data => {
         return res.json(data)
       })
@@ -59,7 +59,7 @@ const updateBrand = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
-    await Brand.update(req.body, {
+    await dbConfig.Brand.update(req.body, {
         where: {
           id: req.params.id
         }
@@ -77,7 +77,7 @@ const deleteBrand = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong brand id format. Try again.');
     }
-    await Brand.destroy({
+    await dbConfig.Brand.destroy({
         where: {
           id: req.params.id
         }

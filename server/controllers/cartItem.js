@@ -3,11 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import CartItem from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllCartItems = async (req, res) => {
   try {
-    await CartItem.findAll()
+    await dbConfig.CartItem.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -22,7 +22,7 @@ const getAllCartItems = async (req, res) => {
 
 const addCartItem = asyncHandler(async (req, res) => {
   try {
-    await Cart.create(req.body)
+    await dbConfig.Cart.create(req.body)
       .then(data => {
         return res.status(200).json(data)
       })

@@ -3,11 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import Product from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllProducts = async (req, res) => {
     try {
-        await Product.findAll()
+        await dbConfig.Product.findAll()
             .then(data => {
                 return res.status(200).json(data);
             })
@@ -25,7 +25,7 @@ const getProduct = async (req, res) => {
         return res.status(404).json('Wrong product id format. Try again.');
         }
 
-        await Product.findByPk(req.params.id)
+        await dbConfig.Product.findByPk(req.params.id)
             .then(data => { 
                 return res.status(200).json(data);
             })
@@ -39,7 +39,7 @@ const getProduct = async (req, res) => {
 
 const addProduct = asyncHandler(async (req, res) => {
     try {
-        await Product.create(req.body)
+        await dbConfig.Product.create(req.body)
             .then(data => {
                 return res.json(data)
             })
@@ -56,7 +56,7 @@ const updateProduct = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong product id format. Try again.');
     }
-    await Product.update(req.body, {
+    await dbConfig.Product.update(req.body, {
             where: {
                 id: req.params.id
             }
@@ -77,7 +77,7 @@ const deleteProduct = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong product id format. Try again.');
     }
-    await Product.destroy({
+    await dbConfig.Product.destroy({
         where: {
             id: req.params.id
         }

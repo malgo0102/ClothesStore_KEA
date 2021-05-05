@@ -3,11 +3,11 @@
 /* eslint-disable camelcase */
 const asyncHandler = require('express-async-handler');
 
-import CardType from '../db/db.config';
+import dbConfig from '../db/db.config';
 
 const getAllCardTypes = async (req, res) => {
   try {
-    await CardType.findAll()
+    await dbConfig.CardType.findAll()
       .then(data => {
         return res.status(200).json(data);
       })
@@ -25,7 +25,7 @@ const getCardType = async (req, res) => {
       return res.status(404).json('Wrong card type id format. Try again.');
     }
 
-    await CardType.findByPk(req.params.id)
+    await dbConfig.CardType.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
       })
@@ -39,7 +39,7 @@ const getCardType = async (req, res) => {
 
 const addCardType = asyncHandler(async (req, res) => {
   try {
-    await CardType.create(req.body)
+    await dbConfig.CardType.create(req.body)
       .then(data => {
         return res.json(data)
       })
@@ -56,7 +56,7 @@ const updateCardType = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong card type id format. Try again.');
     }
-    await CardType.update(req.body, {
+    await dbConfig.CardType.update(req.body, {
       where: {
         id: req.params.id
       }
@@ -77,7 +77,7 @@ const deleteCardType = async (req, res) => {
     if (!req.params.id.match(/^[0-9]*$/)) {
       return res.status(404).json('Wrong role id format. Try again.');
     }
-    await CardType.destroy({
+    await dbConfig.CardType.destroy({
       where: {
         id: req.params.id
       }
