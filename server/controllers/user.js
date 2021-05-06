@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import dbConfig from '../db/db.config';
-import { verifyNewUser }  from '../middlewares/authVerification';
+import { authVerification, authJwt }  from '../middlewares/auth';
 
 const asyncHandler = require('express-async-handler');
 const jwt = require("jsonwebtoken"); // implementation pending
@@ -9,12 +9,12 @@ const bcrypt = require("bcryptjs");
 export const getAllUsers = async (req, res) => {
   try {
     await dbConfig.User.findAll()
-          .then(data => {
-            return res.status(200).json(data);
-          })
-          .catch(err => {
-            return res.status(404).send(err);
-          })
+      .then(data => {
+        return res.status(200).json(data);
+      })
+      .catch(err => {
+        return res.status(404).send(err);
+      })
   } catch (err) {
     console.log(err);
     return res.status(500).json('Internal server error');
@@ -23,16 +23,32 @@ export const getAllUsers = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('No user found');
-    }
     await dbConfig.User.findByPk(req.params.id)
-          .then(data => { 
-            return res.status(200).json(data);
-          })
-          .catch(err => {
-            return res.status(404).send(err);
-          })
+      .then(data => { 
+        return res.status(200).json(data);
+      })
+      .catch(err => {
+        return res.status(404).send(err);
+      })
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json('Internal server error');
+  }      
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    await dbConfig.User.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(data => { 
+        return res.status(200).json(data);
+      })
+      .catch(err => {
+        return res.status(404).send(err);
+      })
   } catch (err) {
     return res.status(500).json('Internal server error');
   }      
@@ -40,7 +56,7 @@ export const getUser = async (req, res) => {
 
 export const registerUser = asyncHandler(async (req, res) => {
   try {
-    if (verifyNewUser(req.body)) {
+    if (authVerification.verifyNewUser(req.body)) {
       return res.status(409).send('User already exists!'); 
     }
     const newUser = {
@@ -51,12 +67,12 @@ export const registerUser = asyncHandler(async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 10),
     }
     await dbConfig.User.create(newUser)
-          .then(data => {
-            return res.json(data)
-          })
-          .catch(err => {
-            return res.status(404).send(err);
-          })
+      .then(data => {
+        return res.json(data)
+      })
+      .catch(err => {
+        return res.status(404).send(err);
+      })
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -66,15 +82,24 @@ export const signInUser = asyncHandler(async (req, res)  => {
   try {
     dbConfig.User.findOne({
       where: {
-          email: user.email
+          email: req.body.email
       }
   })
   .then(data => { 
-      if(bcrypt.compareSync(user.password, data.password)) {
-        return res.status(200).json(data)
-      } else {
-        return res.status(401).send("Unauthorized user, credentials do not match!");
-      }
+    if(!bcrypt.compareSync(req.body.password, data.password)) {
+      return res.status(401).send("Unauthorized user, credentials do not match!"); 
+    }
+    const token = jwt.sign({ id: data.id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRE
+    });
+    return res.status(200).send({
+      id: data.id,
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      role_id: data.role_id,
+      accessToken: token
+    });
   })
   .catch(err => {
     return res.status(404).send(err);

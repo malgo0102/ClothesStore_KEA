@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 import User from '../models/User.js';
 
 const verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  let token = req.headers["auth-token"];
 
   if (!token) {
     return res.status(403).send({
@@ -22,37 +22,37 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  User.findByPk(req.id).then(user => {
+  User.findByPk(req.body.id).then(user => {
         if (user.role_id === 1) {
           next();
           return;
-        }
-        res.status(403).send({
+        } 
+        return res.status(403).send({
         message: "Require Admin Role!"
       });
-      return;
     });
 };
 
+// NOTE: Might not need!
 const isEmployee = (req, res, next) => {
-    User.findByPk(req.id).then(user => {
+    User.findByPk(req.body.id).then(user => {
         if (user.role_id === 2) {
             next();
             return;
         }
-        res.status(403).send({
+        return res.status(403).send({
         message: "Require Employee Role!"
         });
     });
 };
 
 const isEmployeeOrAdmin = (req, res, next) => {
-    User.findByPk(req.id).then(user => {
+    User.findByPk(req.body.id).then(user => {
         if (user.role_id === 1 || user.role_id === 2) {
             next();
             return;
         }
-         res.status(403).send({
+        return res.status(403).send({
             message: "Require Employee or Admin Role!"
         });
     });
@@ -61,7 +61,7 @@ const isEmployeeOrAdmin = (req, res, next) => {
 const authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
-  isModerator: isEmployee,
-  isModeratorOrAdmin: isEmployeeOrAdmin
+  isEmployee: isEmployee,
+  isEmployeeOrAdmin: isEmployeeOrAdmin
 };
 module.exports = authJwt;
