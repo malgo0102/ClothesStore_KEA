@@ -1,13 +1,11 @@
 import dbConfig from '../db/db.config';
 
-var bcrypt = require("bcryptjs");
-
 // Checks if a User credentials match - Probably don't need
-const verifySignUp = (user) => {
+const verifySignUp = (req, res, next) => {
 
 }
 
-// Checks if new User does not already exists (email field in users table is unique)
+// Checks if new User does not already exists (email field in users table is unique) - needs refactoring
 const verifyNewUser = (user) => {
     dbConfig.User.findOne({
             where: {
