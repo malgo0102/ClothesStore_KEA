@@ -1,4 +1,5 @@
 const express = require('express');
+import { authJwt, authParams }  from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -6,10 +7,10 @@ const {
   getAllRoles, getRole, updateRole, addRole, deleteRole,
 } = require('../controllers/role');
 
-router.get('/', getAllRoles);
-router.get('/:id', getRole);
-router.post('/', addRole);
-router.put('/:id', updateRole);
-router.delete('/:id', deleteRole);
+router.get('/', [authJwt.isAdmin, authJwt.verifyToken, getAllRoles]);
+router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, getRole]);
+router.post('/', [authJwt.isAdmin, authJwt.verifyToken, addRole]);
+router.put('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, updateRole]);
+router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteRole]);
 
 module.exports = router;

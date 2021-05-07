@@ -22,9 +22,6 @@ const getAllBrands = async (req, res) => {
 
 const getBrand = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong brand id format. Try again.');
-    }
     await dbConfig.Brand.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
@@ -53,12 +50,8 @@ const addBrand = asyncHandler(async (req, res) => {
 });
 
 
-// TO-DO: change regex expression
 const updateBrand = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong brand id format. Try again.');
-    }
     await dbConfig.Brand.update(req.body, {
         where: {
           id: req.params.id
@@ -74,9 +67,6 @@ const updateBrand = async (req, res) => {
 
 const deleteBrand = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong brand id format. Try again.');
-    }
     await dbConfig.Brand.destroy({
         where: {
           id: req.params.id

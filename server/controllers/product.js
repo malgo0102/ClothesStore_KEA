@@ -21,10 +21,6 @@ const getAllProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
     try {
-        if (!req.params.id.match(/^[0-9]*$/)) {
-        return res.status(404).json('Wrong product id format. Try again.');
-        }
-
         await dbConfig.Product.findByPk(req.params.id)
             .then(data => { 
                 return res.status(200).json(data);
@@ -53,9 +49,6 @@ const addProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong product id format. Try again.');
-    }
     await dbConfig.Product.update(req.body, {
             where: {
                 id: req.params.id
@@ -74,9 +67,6 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong product id format. Try again.');
-    }
     await dbConfig.Product.destroy({
         where: {
             id: req.params.id

@@ -21,10 +21,6 @@ const getAllCardTypes = async (req, res) => {
 
 const getCardType = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong card type id format. Try again.');
-    }
-
     await dbConfig.CardType.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
@@ -53,9 +49,6 @@ const addCardType = asyncHandler(async (req, res) => {
 
 const updateCardType = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong card type id format. Try again.');
-    }
     await dbConfig.CardType.update(req.body, {
       where: {
         id: req.params.id
@@ -74,9 +67,6 @@ const updateCardType = async (req, res) => {
 
 const deleteCardType = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong role id format. Try again.');
-    }
     await dbConfig.CardType.destroy({
       where: {
         id: req.params.id

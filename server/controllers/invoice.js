@@ -22,10 +22,6 @@ const getAllInvoices = async (req, res) => {
 
 const getInvoice = async (req, res) => {
     try {
-      if (!req.params.id.match(/^[0-9]*$/)) {
-        return res.status(404).json('Wrong invoice id format. Try again.');
-      }
-
       await dbConfig.Invoice.findByPk(req.params.id)
         .then(data => {
           return res.status(200).json(data);
