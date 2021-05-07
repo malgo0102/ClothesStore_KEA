@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import dbConfig from '../db/db.config';
-import { authVerification, authJwt }  from '../middlewares/auth';
+import { authVerification }  from '../middlewares/auth';
 
 const asyncHandler = require('express-async-handler');
-const jwt = require("jsonwebtoken"); // implementation pending
+const jwt = require("jsonwebtoken"); 
 const bcrypt = require("bcryptjs");
 
 export const getAllUsers = async (req, res) => {
@@ -54,7 +54,7 @@ export const deleteUser = async (req, res) => {
   }      
 };
 
-export const registerUser = asyncHandler(async (req, res) => {
+export const signUpUser = asyncHandler(async (req, res) => {
   try {
     if (authVerification.verifyNewUser(req.body)) {
       return res.status(409).send('User already exists!'); 

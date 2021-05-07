@@ -21,10 +21,6 @@ const getAllRoles = async (req, res) => {
 
 const getRole = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong role id format. Try again.');
-    }
-
     await dbConfig.Role.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
@@ -53,9 +49,6 @@ const addRole = asyncHandler(async (req, res) => {
 
 const updateRole = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong role id format. Try again.');
-    }
     await dbConfig.Role.update(req.body, {
         where: {
           id: req.params.id
@@ -73,9 +66,6 @@ const updateRole = async (req, res) => {
 
 const deleteRole = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong role id format. Try again.');
-    }
     await dbConfig.Role.destroy({
         where: {
           id: req.params.id

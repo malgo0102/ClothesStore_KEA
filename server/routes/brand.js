@@ -1,4 +1,5 @@
 const express = require('express');
+import { authJwt, authParams }  from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -7,9 +8,9 @@ const {
 } = require('../controllers/brand');
 
 router.get('/', getAllBrands);
-router.get('/:id', getBrand);
-router.post('/', addBrand);
-router.put('/:id', updateBrand);
-router.delete('/:id', deleteBrand);
+router.get('/:id', [authParams.verifyIdParam, getBrand]);
+router.post('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, addBrand]);
+router.put('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, updateBrand]);
+router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteBrand]);
 
 module.exports = router;

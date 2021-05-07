@@ -21,10 +21,6 @@ const getAllFavourites = async (req, res) => {
 
 const getFavourite = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong favourite id format. Try again.');
-    }
-
     await dbConfig.FavouriteProduct.findByPk(req.params.id)
       .then(data => { 
         return res.status(200).json(data);
@@ -53,9 +49,6 @@ const addFavourite = asyncHandler(async (req, res) => {
 
 const deleteFavourite = async (req, res) => {
   try {
-    if (!req.params.id.match(/^[0-9]*$/)) {
-      return res.status(404).json('Wrong favourite id format. Try again.');
-    }
     await dbConfig.FavouriteProduct.destroy({
         where: {
           id: req.params.id
