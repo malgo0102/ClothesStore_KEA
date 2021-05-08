@@ -38,16 +38,3 @@ const User = sequelize.define('User', {
 });
 
 export default User;
-
-// Will delete later after figuring out JWT Authentication
-// const jwt = require('jsonwebtoken');
-// userSchema.methods.generateToken = () => {
-//   const { JWT_SECRET, JWT_EXPIRE } = process.env;
-
-//   const payload = {
-//     id: this._id,
-//   };
-
-//   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRE });
-// };
-// const User = mongoose.model('users', userSchema);
