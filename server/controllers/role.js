@@ -1,19 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
-const asyncHandler = require('express-async-handler');
-
 import dbConfig from '../db/db.config';
+
+const asyncHandler = require('express-async-handler');
 
 const getAllRoles = async (req, res) => {
   try {
     await dbConfig.Role.findAll()
-      .then(data => {
-        return res.status(200).json(data);
-      })
-      .catch(err => {
-        return res.send(err);
-      });
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -22,12 +18,8 @@ const getAllRoles = async (req, res) => {
 const getRole = async (req, res) => {
   try {
     await dbConfig.Role.findByPk(req.params.id)
-      .then(data => { 
-        return res.status(200).json(data);
-      })
-      .catch(err => {
-        return res.send(err);
-      })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -36,12 +28,8 @@ const getRole = async (req, res) => {
 const addRole = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Role.create(req.body)
-      .then(data => {
-        return res.json(data)
-      })
-      .catch(err => {
-        return res.send(err);
-      })
+      .then(data => res.json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -50,15 +38,11 @@ const addRole = asyncHandler(async (req, res) => {
 const updateRole = async (req, res) => {
   try {
     await dbConfig.Role.update(req.body, {
-        where: {
-          id: req.params.id
-        }
-      }).then(() => {
-        return res.status(200).json();
-      })
-      .catch(err => {
-        return res.send(err);
-      });
+      where: {
+        id: req.params.id,
+      },
+    }).then(() => res.status(200).json())
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -67,15 +51,11 @@ const updateRole = async (req, res) => {
 const deleteRole = async (req, res) => {
   try {
     await dbConfig.Role.destroy({
-        where: {
-          id: req.params.id
-        }
-      }).then(() => {
-        return res.status(200).json();
-      })
-      .catch(err => {
-        return res.send(err);
-      });
+      where: {
+        id: req.params.id,
+      },
+    }).then(() => res.status(200).json())
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

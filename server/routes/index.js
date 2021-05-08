@@ -9,7 +9,6 @@ const cartItemsRoutes = require('./cartItem.js');
 const invoicesRoutes = require('./invoice.js');
 const favouritesRoutes = require('./favourite.js');
 
-
 const router = express.Router();
 
 router.use('/users', userRoutes);

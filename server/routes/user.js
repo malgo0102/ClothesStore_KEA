@@ -1,5 +1,6 @@
+import { authJwt, authParams } from '../middlewares/auth';
+
 const express = require('express');
-import { authJwt, authParams }  from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -11,8 +12,7 @@ router.get('/', [authJwt.verifyToken, authJwt.isAdmin, getAllUsers]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getUser]);
 router.post('/signup', signUpUser);
 router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteUser]);
-router.post('/signin', signInUser); 
-
+router.post('/signin', signInUser);
 
 // TODO - put - updateUser (isAdmin) (with access to route)
 // TODO - get - see user profile (with access to route)

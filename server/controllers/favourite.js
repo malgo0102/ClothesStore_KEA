@@ -1,19 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
-const asyncHandler = require('express-async-handler');
-
 import dbConfig from '../db/db.config';
+
+const asyncHandler = require('express-async-handler');
 
 const getAllFavourites = async (req, res) => {
   try {
     await dbConfig.FavouriteProduct.findAll()
-      .then(data => {
-        return res.status(200).json(data);
-      })
-      .catch(err => {
-        return res.send(err);
-      });
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -22,12 +18,8 @@ const getAllFavourites = async (req, res) => {
 const getFavourite = async (req, res) => {
   try {
     await dbConfig.FavouriteProduct.findByPk(req.params.id)
-      .then(data => { 
-        return res.status(200).json(data);
-      })
-      .catch(err => {
-        return res.send(err);
-      })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -36,12 +28,8 @@ const getFavourite = async (req, res) => {
 const addFavourite = asyncHandler(async (req, res) => {
   try {
     await dbConfig.FavouriteProduct.create(req.body)
-      .then(data => {
-        return res.status(200).json(data)
-      })
-      .catch(err => {
-        return res.send(err);
-      })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -50,16 +38,12 @@ const addFavourite = asyncHandler(async (req, res) => {
 const deleteFavourite = async (req, res) => {
   try {
     await dbConfig.FavouriteProduct.destroy({
-        where: {
-          id: req.params.id
-        }
-      })
-      .then(() => {
-        return res.status(200).json();
-      })
-      .catch(err => {
-        return res.send(err);
-      });
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then(() => res.status(200).json())
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

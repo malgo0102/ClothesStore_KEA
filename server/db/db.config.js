@@ -9,7 +9,6 @@ import Product from '../models/Product';
 import Role from '../models/Role';
 import User from '../models/User';
 
-
 // Defining associations between Sequelize Models,
 // may remove some or add 'many-to-many' associations later
 Brand.hasMany(Product, { foreignKey: 'brand_id' });
@@ -29,17 +28,16 @@ FavouriteProduct.belongsTo(User, { foreignKey: 'user_id' });
 FavouriteProduct.belongsTo(Product, { foreignKey: 'product_id' });
 
 const dbConfig = {
-    Sequelize: sequelize,
-    Brand: Brand,
-    Product: Product,
-    Role: Role,
-    User: User,
-    Cart: Cart,
-    Invoice: Invoice,
-    CartItem: CartItem,
-    CardType: CardType,
-    FavouriteProduct: FavouriteProduct,
-  };
+  Sequelize: sequelize,
+  Brand,
+  Product,
+  Role,
+  User,
+  Cart,
+  Invoice,
+  CartItem,
+  CardType,
+  FavouriteProduct,
+};
 
 export default dbConfig;
-
