@@ -1,34 +1,26 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
-const asyncHandler = require('express-async-handler');
-
 import dbConfig from '../db/db.config';
 
-const getAllBrands = async (req, res) => {
+const asyncHandler = require('express-async-handler');
 
+const getAllBrands = async (req, res) => {
   try {
     dbConfig.Brand.findAll()
-      .then(data => {
-        return res.status(200).json(data);
-      })
-      .catch(err => {
-        return res.send(err);
-      });
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
-    return res.status(500).json('Internal server error: ' + err);
+    return res.status(500).json(`Internal server error: ${err}`);
   }
 };
 
 const getBrand = async (req, res) => {
   try {
     await dbConfig.Brand.findByPk(req.params.id)
-      .then(data => { 
-        return res.status(200).json(data);
-      })
-      .catch(err => {
-        return res.send(err);
-      })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -37,29 +29,24 @@ const getBrand = async (req, res) => {
 const addBrand = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Brand.create(req.body)
-      .then(data => {
-        return res.json(data)
-      })
+      .then(data => res.json(data))
       .catch(err => {
         console.log(err);
         return res.send(err);
-      })
+      });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
 });
 
-
 const updateBrand = async (req, res) => {
   try {
     await dbConfig.Brand.update(req.body, {
-        where: {
-          id: req.params.id
-        }
-      })
-      .catch(err => {
-    return res.send(err);
-    });
+      where: {
+        id: req.params.id,
+      },
+    })
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -68,10 +55,10 @@ const updateBrand = async (req, res) => {
 const deleteBrand = async (req, res) => {
   try {
     await dbConfig.Brand.destroy({
-        where: {
-          id: req.params.id
-        }
-      });
+      where: {
+        id: req.params.id,
+      },
+    });
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

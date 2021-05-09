@@ -1,10 +1,18 @@
+import {
+  authJwt,
+  authParams,
+} from '../middlewares/auth';
+
 const express = require('express');
-import { authJwt, authParams }  from '../middlewares/auth';
 
 const router = express.Router();
 
 const {
-  getAllProducts, getProduct, updateProduct, addProduct, deleteProduct,
+  getAllProducts,
+  getProduct,
+  updateProduct,
+  addProduct,
+  deleteProduct,
 } = require('../controllers/product');
 
 router.get('/', getAllProducts);

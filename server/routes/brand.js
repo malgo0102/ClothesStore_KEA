@@ -1,10 +1,18 @@
+import {
+  authJwt,
+  authParams,
+} from '../middlewares/auth';
+
 const express = require('express');
-import { authJwt, authParams }  from '../middlewares/auth';
 
 const router = express.Router();
 
 const {
-  getAllBrands, getBrand, updateBrand, addBrand, deleteBrand,
+  getAllBrands,
+  getBrand,
+  updateBrand,
+  addBrand,
+  deleteBrand,
 } = require('../controllers/brand');
 
 router.get('/', getAllBrands);
