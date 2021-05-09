@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
   const token = req.headers['auth-token'];
-
   if (!token) {
     return res.status(403).send({
       message: 'No token provided!',
@@ -24,7 +23,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  User.findByPk(req.body.id).then(user => {
+  User.findByPk(req.id).then(user => {
     if (user.role_id === 1) {
       next();
       return;
@@ -37,7 +36,7 @@ const isAdmin = (req, res, next) => {
 
 // NOTE: Might not need!
 const isEmployee = (req, res, next) => {
-  User.findByPk(req.body.id).then(user => {
+  User.findByPk(req.id).then(user => {
     if (user.role_id === 2) {
       next();
       return;
@@ -49,7 +48,7 @@ const isEmployee = (req, res, next) => {
 };
 
 const isEmployeeOrAdmin = (req, res, next) => {
-  User.findByPk(req.body.id).then(user => {
+  User.findByPk(req.id).then(user => {
     if (user.role_id === 1 || user.role_id === 2) {
       next();
       return;
