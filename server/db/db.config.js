@@ -9,8 +9,6 @@ import Product from '../models/Product';
 import Role from '../models/Role';
 import User from '../models/User';
 
-// Defining associations between Sequelize Models,
-// may remove some or add 'many-to-many' associations later
 Brand.hasMany(Product, {
   foreignKey: 'brand_id',
 });
