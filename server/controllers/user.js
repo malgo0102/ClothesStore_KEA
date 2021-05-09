@@ -1,7 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 import dbConfig from '../db/db.config';
-import { authVerification } from '../middlewares/auth';
+import {
+  authVerification,
+} from '../middlewares/auth';
 
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
@@ -74,7 +76,9 @@ export const signInUser = asyncHandler(async (req, res) => {
         if (!bcrypt.compareSync(req.body.password, data.password)) {
           return res.status(401).send('Unauthorized user, credentials do not match!');
         }
-        const token = jwt.sign({ id: data.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({
+          id: data.id,
+        }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRE,
         });
         return res.status(200).send({

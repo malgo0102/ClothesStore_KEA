@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getAllCartItems, addCartItem,
+  getAllCartItems,
+  addCartItem,
 } = require('../controllers/cartItem');
 
 router.get('/', getAllCartItems);

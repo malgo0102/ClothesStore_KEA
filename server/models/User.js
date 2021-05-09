@@ -1,5 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { DATE, INTEGER, STRING } from 'sequelize';
+import {
+  DATE,
+  INTEGER,
+  STRING,
+} from 'sequelize';
 import sequelize from '../db/index';
 
 // Holds information about Users - stored into the sequelize object from our index.js
@@ -7,7 +11,6 @@ const User = sequelize.define('User', {
   role_id: {
     type: INTEGER,
     allowNull: false,
-    // defaultValue: 1, // if we want a default role?
   },
   first_name: {
     type: STRING,
@@ -33,7 +36,7 @@ const User = sequelize.define('User', {
     type: DATE,
   },
 }, {
-  tableName: 'users', // which table to map the sequelize model object to
+  tableName: 'users',
   timestamps: false,
 });
 

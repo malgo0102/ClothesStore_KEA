@@ -1,5 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import { INTEGER, DATE } from 'sequelize';
+import {
+  INTEGER,
+  DATE,
+} from 'sequelize';
 import sequelize from '../db/index';
 
 // Holds information about carts - stored into the sequelize object from our index.js

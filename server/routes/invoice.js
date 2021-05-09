@@ -1,11 +1,16 @@
-import { authJwt, authParams } from '../middlewares/auth';
+import {
+  authJwt,
+  authParams,
+} from '../middlewares/auth';
 
 const express = require('express');
 
 const router = express.Router();
 
 const {
-  getAllInvoices, getInvoice, addInvoice,
+  getAllInvoices,
+  getInvoice,
+  addInvoice,
 } = require('../controllers/invoice');
 
 router.get('/', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);

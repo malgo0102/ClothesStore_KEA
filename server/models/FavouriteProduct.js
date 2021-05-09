@@ -1,5 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import { INTEGER, STRING } from 'sequelize';
+import {
+  INTEGER,
+  STRING,
+} from 'sequelize';
 import sequelize from '../db/index';
 
 // Holds information about invoices - stored into the sequelize object from our index.js

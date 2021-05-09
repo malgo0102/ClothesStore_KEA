@@ -1,11 +1,18 @@
-import { authJwt, authParams } from '../middlewares/auth';
+import {
+  authJwt,
+  authParams,
+} from '../middlewares/auth';
 
 const express = require('express');
 
 const router = express.Router();
 
 const {
-  getAllUsers, getUser, signInUser, signUpUser, deleteUser,
+  getAllUsers,
+  getUser,
+  signInUser,
+  signUpUser,
+  deleteUser,
 } = require('../controllers/user');
 
 router.get('/', [authJwt.verifyToken, authJwt.isAdmin, getAllUsers]);

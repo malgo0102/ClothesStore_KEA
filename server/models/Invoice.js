@@ -1,6 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import {
-  STRING, INTEGER, FLOAT, DATE,
+  STRING,
+  INTEGER,
+  FLOAT,
+  DATE,
 } from 'sequelize'; // import data types to set our fields as for our Model
 import sequelize from '../db/index';
 

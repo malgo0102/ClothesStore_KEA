@@ -1,11 +1,18 @@
-import { authJwt, authParams } from '../middlewares/auth';
+import {
+  authJwt,
+  authParams,
+} from '../middlewares/auth';
 
 const express = require('express');
 
 const router = express.Router();
 
 const {
-  getAllRoles, getRole, updateRole, addRole, deleteRole,
+  getAllRoles,
+  getRole,
+  updateRole,
+  addRole,
+  deleteRole,
 } = require('../controllers/role');
 
 router.get('/', [authJwt.isAdmin, authJwt.verifyToken, getAllRoles]);

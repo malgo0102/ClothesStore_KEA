@@ -13,7 +13,7 @@ const verifyNewUser = user => {
   dbConfig.User.findOne({
     where: {
       // eslint-disable-next-line indent
-                email: user.email,
+        email: user.email,
     },
   })
     .then(data => {

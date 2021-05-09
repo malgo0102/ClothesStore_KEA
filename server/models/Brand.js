@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import { STRING } from 'sequelize';
+import {
+  STRING,
+} from 'sequelize';
 import sequelize from '../db/index';
 
 // Holds information about brands - stored into the sequelize object from our index.js
@@ -18,7 +20,7 @@ const Brand = sequelize.define('Brand', {
   },
 
 }, {
-  tableName: 'brands', // which table to map the sequelize model object to
+  tableName: 'brands',
   timestamps: false,
 });
 

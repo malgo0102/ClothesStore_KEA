@@ -1,11 +1,23 @@
 /* eslint-disable no-console */
-import { Sequelize } from 'sequelize';
+import {
+  Sequelize,
+} from 'sequelize';
 
-const { DB_HOST } = process.env;
-const { DB } = process.env;
-const { DB_USER } = process.env;
-const { DB_PASS } = process.env;
-const { DB_DIALECT } = process.env;
+const {
+  DB_HOST,
+} = process.env;
+const {
+  DB,
+} = process.env;
+const {
+  DB_USER,
+} = process.env;
+const {
+  DB_PASS,
+} = process.env;
+const {
+  DB_DIALECT,
+} = process.env;
 // Which type of db to connect to; in our case, a 'mysql' database
 
 // Sequelize database connection

@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import { STRING } from 'sequelize';
+import {
+  STRING,
+} from 'sequelize';
 import sequelize from '../db/index';
 
 // Holds information about roles - stored into the sequelize object from our index.js

@@ -1,11 +1,15 @@
-import { authParams } from '../middlewares/auth';
+import {
+  authParams,
+} from '../middlewares/auth';
 
 const express = require('express');
 
 const router = express.Router();
 
 const {
-  getAllCarts, getCart, addCart,
+  getAllCarts,
+  getCart,
+  addCart,
 } = require('../controllers/cart');
 
 router.get('/', getAllCarts);

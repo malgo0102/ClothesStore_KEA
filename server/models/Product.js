@@ -1,5 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { INTEGER, STRING, FLOAT } from 'sequelize';
+import {
+  INTEGER,
+  STRING,
+  FLOAT,
+} from 'sequelize';
 import sequelize from '../db/index';
 
 // Holds information about products - stored into the sequelize object from our index.js
