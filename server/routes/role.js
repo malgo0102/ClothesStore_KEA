@@ -15,7 +15,7 @@ const {
   deleteRole,
 } = require('../controllers/role');
 
-router.get('/', [authJwt.isAdmin, authJwt.verifyToken, getAllRoles]);
+router.get('/', [authJwt.verifyToken, authJwt.isAdmin, getAllRoles]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, getRole]);
 router.post('/', [authJwt.isAdmin, authJwt.verifyToken, addRole]);
 router.put('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, updateRole]);

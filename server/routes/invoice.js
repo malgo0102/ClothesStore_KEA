@@ -13,7 +13,7 @@ const {
   addInvoice,
 } = require('../controllers/invoice');
 
-router.get('/', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);
+router.get('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoice]);
 router.post('/', addInvoice);
 

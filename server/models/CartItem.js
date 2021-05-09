@@ -29,7 +29,7 @@ const CartItem = sequelize.define('CartItem', {
     allowNull: false,
   },
 }, {
-  tableName: 'invoices', // which table to map the sequelize model object to
+  tableName: 'cart_items', // which table to map the sequelize model object to
   timestamps: false,
 });
 

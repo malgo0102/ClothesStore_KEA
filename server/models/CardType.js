@@ -3,7 +3,7 @@ import sequelize from '../db/index';
 
 // Holds information about card_types - stored into the sequelize object from our index.js
 const CardType = sequelize.define('CardType', {
-  names: {
+  name: {
     type: String,
     allowNull: false,
     unique: true,

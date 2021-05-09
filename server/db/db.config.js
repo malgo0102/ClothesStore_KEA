@@ -48,6 +48,9 @@ CartItem.belongsTo(Cart, {
 CartItem.belongsTo(Product, {
   foreignKey: 'product_id',
 });
+CartItem.belongsTo(Invoice, {
+  foreignKey: 'invoice_id',
+});
 FavouriteProduct.belongsTo(User, {
   foreignKey: 'user_id',
 });
