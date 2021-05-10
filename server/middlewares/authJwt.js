@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import User from '../models/User';
+import dbConfig from '../db/db.config';
 
 const jwt = require('jsonwebtoken');
 
@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  User.findByPk(req.id).then(user => {
+  dbConfig.User.findByPk(req.id).then(user => {
     if (user.role_id === 1) {
       next();
       return;
@@ -35,7 +35,7 @@ const isAdmin = (req, res, next) => {
 };
 
 const isEmployeeOrAdmin = (req, res, next) => {
-  User.findByPk(req.id).then(user => {
+  dbConfig.User.findByPk(req.id).then(user => {
     if (user.role_id === 1 || user.role_id === 2) {
       next();
       return;
