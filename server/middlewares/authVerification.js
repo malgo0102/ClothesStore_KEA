@@ -1,34 +1,40 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 import dbConfig from '../db/db.config';
 
-// Checks if a User credentials match - Probably don't need
-const verifySignUp = (req, res, next) => {
-
-};
-
-// Checks if new User does not already exists (email field in users table is unique) - needs refactoring
-const verifyNewUser = user => {
+const verifyExistingUser = (req, res, next) => {
   dbConfig.User.findOne({
     where: {
-      // eslint-disable-next-line indent
-        email: user.email,
+      email: req.body.email,
+    },
+  })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send('User not found!');
+      }
+      next();
+    })
+    .catch(err => console.log(err));
+};
+
+const verifyNewUser = (req, res, next) => {
+  dbConfig.User.findOne({
+    where: {
+      email: req.body.email,
     },
   })
     .then(data => {
       if (data) {
-        return true;
+        return res.status(409).send('User already exists!');
       }
-      return false;
+      next();
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
 };
 
 const authVerification = {
-  verifySignUp,
+  verifyExistingUser,
   verifyNewUser,
 };
 

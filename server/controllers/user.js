@@ -1,9 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 import dbConfig from '../db/db.config';
-import {
-  authVerification,
-} from '../middlewares/auth';
 
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
@@ -47,9 +44,6 @@ export const deleteUser = async (req, res) => {
 
 export const signUpUser = asyncHandler(async (req, res) => {
   try {
-    if (authVerification.verifyNewUser(req.body)) {
-      return res.status(409).send('User already exists!');
-    }
     const newUser = {
       role_id: req.body.role_id,
       first_name: req.body.first_name,
