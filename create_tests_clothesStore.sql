@@ -6,7 +6,6 @@ SELECT * FROM products;
 SELECT * FROM roles;
 SELECT * FROM users;
 SELECT * FROM card_types;
-SELECT * FROM carts;
 SELECT * FROM invoices;
 SELECT * FROM cart_items;
 SELECT * FROM favourite_products;

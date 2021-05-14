@@ -7,7 +7,7 @@ import sequelize from '../db/index';
 
 // Holds information about cart_items - stored into the sequelize object from our index.js
 const CartItem = sequelize.define('CartItem', {
-  cart_id: {
+  user_id: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true, // Sequelize will set a default 'id' field for a Model if we don't specify it

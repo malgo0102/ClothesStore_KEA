@@ -1,4 +1,4 @@
-ROP DATABASE IF EXISTS clothes_store;
+DROP DATABASE IF EXISTS clothes_store;
 CREATE DATABASE IF NOT EXISTS clothes_store;
 
 USE clothes_store;
@@ -67,25 +67,15 @@ CREATE TABLE invoices(
         ON DELETE CASCADE
 );
 
-CREATE TABLE carts(
-  id INT(5) AUTO_INCREMENT NOT NULL UNIQUE,
-  user_id INT(5) NOT NULL,
-  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-
-  PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES users(id)
-        ON DELETE CASCADE
-);
-
 CREATE TABLE cart_items (
-  cart_id INT(11) NOT NULL,
+  user_id INT(11) NOT NULL,
   product_id INT(11) NOT NULL,
   invoice_id INT(11) NOT NULL,
   quantity INT(11) NOT NULL,
   unit_price FLOAT(11) NOT NULL,
 
-  PRIMARY KEY (cart_id, product_id),
-  FOREIGN KEY (cart_id) REFERENCES carts(id)
+  PRIMARY KEY (user_id, product_id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE,
   FOREIGN KEY (product_id) REFERENCES products(id)
         ON DELETE CASCADE,
