@@ -19,9 +19,6 @@ INSERT INTO users (role_id, first_name, last_name, password, email) VALUES
 (3, 'Jamie', 'Joe', 'JoeBoe', 'jamiejoe@mystore.com'),
 (3, 'Jamie', 'Boe', 'JoeBoe', 'employeeBoe@mystore.com');
 
-INSERT INTO carts (user_id, timestamp) VALUES
-(1, TIMESTAMP('2020-06-24 18:30')),
-(2, TIMESTAMP('2020-06-26 15:45'));
 
 INSERT INTO card_types (name) VALUES
 ('MASTERCARD'),

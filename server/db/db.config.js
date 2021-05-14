@@ -1,7 +1,6 @@
 import sequelize from './index';
 import Brand from '../models/Brand';
 import CardType from '../models/CardType';
-import Cart from '../models/Cart';
 import CartItem from '../models/CartItem';
 import FavouriteProduct from '../models/FavouriteProduct';
 import Invoice from '../models/Invoice';
@@ -24,14 +23,8 @@ Role.hasMany(User, {
 User.belongsTo(Role, {
   foreignKey: 'role_id',
 });
-User.hasMany(Cart, {
+User.hasMany(CartItem, {
   foreignKey: 'user_id',
-});
-Cart.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-Cart.hasMany(CartItem, {
-  foreignKey: 'cart_id',
 });
 CardType.hasMany(Invoice, {
   foreignKey: 'card_type_id',
@@ -42,8 +35,8 @@ Invoice.belongsTo(CardType, {
 Invoice.hasMany(CartItem, {
   foreignKey: 'invoice_id',
 });
-CartItem.belongsTo(Cart, {
-  foreignKey: 'cart_id',
+CartItem.belongsTo(User, {
+  foreignKey: 'user_id',
 });
 CartItem.belongsTo(Product, {
   foreignKey: 'product_id',
@@ -64,7 +57,6 @@ const dbConfig = {
   Product,
   Role,
   User,
-  Cart,
   Invoice,
   CartItem,
   CardType,
