@@ -26,13 +26,19 @@ const getInvoice = async (req, res) => {
 };
 
 // Unmanaged transactions: https://sequelize.org/master/manual/transactions.html
-
 const addInvoice = asyncHandler(async (req, res) => {
   const t = await dbConfig.Sequelize.transaction();
   try {
-    // const cart = await dbConfig.Cart.create(req.body.cart, { transaction: t });
-    // const invoice = await Invoice.create(req.body.invoice, { transaction: t });
-    // const cart_items = await dbConfig.CartItem.create(req.body.cart_items, { transaction: t });
+    console.log(req.body);
+    console.log(req.body.invoice);
+    console.log(req.body.cart_item);
+    const invoice = await dbConfig.Invoice.create(req.body.invoice, { transaction: t })
+    const cart_items = await dbConfig.CartItem.create(req.body.cart_item, { transaction: t });
+    // https://nodejs.dev/learn/understanding-javascript-promises
+    // Synchronize different promises
+    Promise.all([invoice, cart_items])
+        .then(data => res.status(200).json(data))
+        .catch(err => res.send(err));
 
     await t.commit().then(() => res.status(200));
   } catch (err) {
@@ -40,20 +46,26 @@ const addInvoice = asyncHandler(async (req, res) => {
   }
 });
 
-// const addInvoice = asyncHandler(async (req, res) => {
-//   try {
-//     await dbConfig.Invoice.create(req.body)
-//       .then(data => {
-//         return res.status(200).json(data)
-//       })
-//       .catch(err => {
-//         return res.send(err);
-//       })
-//
-//   } catch (err) {
-//     return res.status(500).json('Internal server error');
-//   }
-// });
+// for testing in postman:
+// http://localhost:8080/api/invoices/
+// {
+//   "invoice": {
+//   "id": 3,
+//       "card_type_id": 1,
+//       "card_number": 11223344,
+//       "card_holder": "Bob Bayes",
+//       "date": "2020-06-26T15:45:00.000Z",
+//       "total_price": 1600
+// },
+//   "cart_item": {
+//   "user_id": 1,
+//       "product_id": 3,
+//       "invoice_id": 3,
+//       "quantity": 4,
+//       "unit_price": 400
+// }
+// }
+
 
 module.exports.getAllInvoices = getAllInvoices;
 module.exports.getInvoice = getInvoice;

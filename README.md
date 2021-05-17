@@ -19,8 +19,8 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 - PORT={port} (e.g. we use 8080)
 
 **Creating database**
-1. create_clothes_store_db.sql: Contains all scripts to create new database and add a new user to it
-2. populate_clothes_store_db.sql: Contains scripts to populate the database with data
+1. 001_create_clothes_store_db.sql: Contains all scripts to create new database and add a new user to it
+2. 002_populate_clothes_store_db.sql: Contains scripts to populate the database with data
 
 **Running the app**
 1. Navigate to the folder server folder

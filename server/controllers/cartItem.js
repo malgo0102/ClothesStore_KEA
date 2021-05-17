@@ -11,19 +11,11 @@ const getAllCartItems = async (req, res) => {
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));
   } catch (err) {
-    return res.status(500).json('Internal server error');
+    return res.status(500).json(`Internal server error: ${err}`);
   }
 };
 
-const addCartItem = asyncHandler(async (req, res) => {
-  try {
-    await dbConfig.Cart.create(req.body)
-      .then(data => res.status(200).json(data))
-      .catch(err => res.send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-});
+// add cart item handled in controllers/invoice.js in the transaction in the object addInvoice
 
 module.exports.getAllCartItems = getAllCartItems;
-module.exports.addCartItem = addCartItem;
+
