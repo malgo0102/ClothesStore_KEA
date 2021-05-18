@@ -34,6 +34,10 @@ const {
  *     responses:
  *       '201':
  *         description: Created, added new product
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin or employee role
  *       '500':
  *         description: Internal server error
  * /api/products/:id:
@@ -55,6 +59,12 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, updated product
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin or employee role
  *       '500':
  *         description: Internal server error
  *   delete:
@@ -64,6 +74,12 @@ const {
  *     responses:
  *       '204':
  *         description: No content, deleted product
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '500':
  *         description: Internal server error
  */
