@@ -23,7 +23,7 @@ const swaggerOptions = {
       servers: ['http://localhost:8080'],
     },
   },
-  apis: ['app.js', './routes/*.js'],
+  apis: ['app.js', './routes/index.js', './routes/api/*.js'],
 };
 
 // Define swaggerDocs, pass in configuration
@@ -44,6 +44,8 @@ app.use(cors());
  * /:
  *   get:
  *     description: Use to request index page
+ *     tags:
+ *       - index
  *     responses:
  *       '200':
  *         description: A successful response, API is running

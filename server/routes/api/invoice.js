@@ -18,6 +18,8 @@ const {
  * /api/invoices:
  *   get:
  *     description: Use to request all invoices
+ *     tags:
+ *       - invoices
  *     responses:
  *       '200':
  *         description: A successful response, returned all invoices
@@ -25,6 +27,8 @@ const {
  *         description: Internal server error
  *   post:
  *     description: Use to add invoice
+ *     tags:
+ *       - invoices
  *     responses:
  *       '200':
  *         description: A successful response, added invoice
@@ -33,6 +37,8 @@ const {
  * /api/invoices/:id:
  *   get:
  *     description: Use to request invoice
+ *     tags:
+ *       - invoices
  *     responses:
  *       '200':
  *         description: A successful response, returned invoice

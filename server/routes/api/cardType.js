@@ -20,6 +20,8 @@ const {
  * /api/cards:
  *   get:
  *     description: Use to request all card types
+ *     tags:
+ *       - cards
  *     responses:
  *       '200':
  *         description: A successful response, returned all card types
@@ -27,6 +29,8 @@ const {
  *         description: Internal server error
  *   post:
  *     description: Use to add card type
+ *     tags:
+ *       - cards
  *     responses:
  *       '200':
  *         description: A successful response, added card type
@@ -35,6 +39,8 @@ const {
  * /api/cards/:id:
  *   get:
  *     description: Use to request card type
+ *     tags:
+ *       - cards
  *     responses:
  *       '200':
  *         description: A successful response, returned card type
@@ -42,6 +48,8 @@ const {
  *         description: Internal server error
  *   put:
  *     description: Use to update card type
+ *     tags:
+ *       - cards
  *     responses:
  *       '200':
  *         description: A successful response, updated card type
@@ -49,9 +57,11 @@ const {
  *         description: Internal server error
  *   delete:
  *     description: Use to delete card type
+ *     tags:
+ *       - cards
  *     responses:
- *       '200':
- *         description: A successful response, deleted card type
+ *       '204':
+ *         description: No content, deleted card type
  *       '500':
  *         description: Internal server error
  */

@@ -20,6 +20,8 @@ const {
  * /api/products:
  *   get:
  *     description: Use to request all products
+ *     tags:
+ *       - products
  *     responses:
  *       '200':
  *         description: A successful response, returned all products
@@ -27,6 +29,8 @@ const {
  *         description: Internal server error
  *   post:
  *     description: Use to add product
+ *     tags:
+ *       - products
  *     responses:
  *       '200':
  *         description: A successful response, added product
@@ -35,6 +39,8 @@ const {
  * /api/products/:id:
  *   get:
  *     description: Use to request product
+ *     tags:
+ *       - products
  *     responses:
  *       '200':
  *         description: A successful response, returned product
@@ -42,6 +48,8 @@ const {
  *         description: Internal server error
  *   put:
  *     description: Use to update product
+ *     tags:
+ *       - products
  *     responses:
  *       '200':
  *         description: A successful response, updated product
@@ -49,9 +57,11 @@ const {
  *         description: Internal server error
  *   delete:
  *     description: Use to delete product
+ *     tags:
+ *       - products
  *     responses:
- *       '200':
- *         description: A successful response, deleted product
+ *       '204':
+ *         description: No content, deleted product
  *       '500':
  *         description: Internal server error
  */

@@ -35,7 +35,7 @@ export const deleteUser = async (req, res) => {
         id: req.params.id,
       },
     })
-      .then(data => res.status(200).json(data))
+      .then(data => res.status(204).json(data))
       .catch(err => res.status(404).send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');

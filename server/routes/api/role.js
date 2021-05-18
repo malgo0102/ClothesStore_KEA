@@ -20,6 +20,8 @@ const {
  * /api/roles:
  *   get:
  *     description: Use to request all roles
+ *     tags:
+ *       - roles
  *     responses:
  *       '200':
  *         description: A successful response, returned all roles
@@ -27,6 +29,8 @@ const {
  *         description: Internal server error
  *   post:
  *     description: Use to add role
+ *     tags:
+ *       - roles
  *     responses:
  *       '200':
  *         description: A successful response, added role
@@ -35,6 +39,8 @@ const {
  * /api/roles/:id:
  *   get:
  *     description: Use to request role
+ *     tags:
+ *       - roles
  *     responses:
  *       '200':
  *         description: A successful response, returned role
@@ -42,6 +48,8 @@ const {
  *         description: Internal server error
  *   put:
  *     description: Use to update role
+ *     tags:
+ *       - roles
  *     responses:
  *       '200':
  *         description: A successful response, updated role
@@ -49,9 +57,11 @@ const {
  *         description: Internal server error
  *   delete:
  *     description: Use to delete role
+ *     tags:
+ *       - roles
  *     responses:
- *       '200':
- *         description: A successful response, deleted role
+ *       '204':
+ *         description: No content, deleted role
  *       '500':
  *         description: Internal server error
  */

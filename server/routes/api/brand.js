@@ -20,6 +20,8 @@ const {
  * /api/brands:
  *   get:
  *     description: Use to request all brands
+ *     tags:
+ *       - brands
  *     responses:
  *       '200':
  *         description: A successful response, returned all brands
@@ -27,6 +29,8 @@ const {
  *         description: Internal server error
  *   post:
  *     description: Use to add brand
+ *     tags:
+ *       - brands
  *     responses:
  *       '200':
  *         description: A successful response, added brand
@@ -35,6 +39,8 @@ const {
  * /api/brands/:id:
  *   get:
  *     description: Use to request brand
+ *     tags:
+ *       - brands
  *     responses:
  *       '200':
  *         description: A successful response, returned brand
@@ -42,6 +48,8 @@ const {
  *         description: Internal server error
  *   put:
  *     description: Use to update brand
+ *     tags:
+ *       - brands
  *     responses:
  *       '200':
  *         description: A successful response, updated brand
@@ -49,9 +57,11 @@ const {
  *         description: Internal server error
  *   delete:
  *     description: Use to delete brand
+ *     tags:
+ *       - brands
  *     responses:
- *       '200':
- *         description: A successful response, deleted brand
+ *       '204':
+ *         description: No content, deleted brand
  *       '500':
  *         description: Internal server error
  */
