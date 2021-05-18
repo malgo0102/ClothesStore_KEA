@@ -28,7 +28,7 @@ const getProduct = async (req, res) => {
 const addProduct = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Product.create(req.body)
-      .then(data => res.json(data))
+      .then(data => res.status(200).json(data))
       .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
