@@ -1,7 +1,7 @@
 import {
   authJwt,
   authParams,
-} from '../middlewares/auth';
+} from '../../middlewares/auth';
 
 const express = require('express');
 
@@ -13,7 +13,7 @@ const {
   updateCardType,
   addCardType,
   deleteCardType,
-} = require('../controllers/cardType');
+} = require('../../controllers/cardType');
 
 /**
  * @swagger

@@ -2,7 +2,7 @@ import {
   authJwt,
   authParams,
   authVerification,
-} from '../middlewares/auth';
+} from '../../middlewares/auth';
 
 const express = require('express');
 
@@ -14,7 +14,7 @@ const {
   signInUser,
   signUpUser,
   deleteUser,
-} = require('../controllers/user');
+} = require('../../controllers/user');
 
 /**
  * @swagger

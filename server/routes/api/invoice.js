@@ -1,7 +1,7 @@
 import {
   authJwt,
   authParams,
-} from '../middlewares/auth';
+} from '../../middlewares/auth';
 
 const express = require('express');
 
@@ -11,7 +11,7 @@ const {
   getAllInvoices,
   getInvoice,
   addInvoice,
-} = require('../controllers/invoice');
+} = require('../../controllers/invoice');
 
 /**
  * @swagger
