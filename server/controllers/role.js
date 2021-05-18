@@ -54,7 +54,7 @@ const deleteRole = async (req, res) => {
       where: {
         id: req.params.id,
       },
-    }).then(() => res.status(200).json())
+    }).then(() => res.status(204).json())
       .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');

@@ -19,6 +19,8 @@ const {
  * /api/favourites:
  *   get:
  *     description: Use to request all favourite products
+ *     tags:
+ *       - favourites
  *     responses:
  *       '200':
  *         description: A successful response, returned all favourite products
@@ -26,6 +28,8 @@ const {
  *         description: Internal server error
  *   post:
  *     description: Use to add favourite product
+ *     tags:
+ *       - favourites
  *     responses:
  *       '200':
  *         description: A successful response, added favourite product
@@ -34,6 +38,8 @@ const {
  * /api/favourites/:id:
  *   get:
  *     description: Use to request favourite product
+ *     tags:
+ *       - favourites
  *     responses:
  *       '200':
  *         description: A successful response, returned favourite product
@@ -41,9 +47,11 @@ const {
  *         description: Internal server error
  *   delete:
  *     description: Use to delete favourite product
+ *     tags:
+ *       - favourites
  *     responses:
- *       '200':
- *         description: A successful response, deleted favourite product
+ *       '204':
+ *         description: No content, deleted favourite product
  *       '500':
  *         description: Internal server error
  */

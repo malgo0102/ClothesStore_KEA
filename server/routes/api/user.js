@@ -21,6 +21,8 @@ const {
  * /api/users:
  *   get:
  *     description: Use to request all users
+ *     tags:
+ *       - users
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
@@ -31,6 +33,8 @@ const {
  * /api/users/:id:
  *   get:
  *     description: Use to request user
+ *     tags:
+ *       - users
  *     responses:
  *       '200':
  *         description: A successful response, returned user
@@ -40,9 +44,11 @@ const {
  *         description: Internal server error
  *   delete:
  *     description: Use to delete user
+ *     tags:
+ *       - users
  *     responses:
- *       '200':
- *         description: A successful response, deleted user
+ *       '204':
+ *         description: No content, deleted user
  *       '404':
  *         description: Page not found
  *       '500':
@@ -50,6 +56,8 @@ const {
  * /api/users/signup:
  *   post:
  *     description: Use to add new user
+ *     tags:
+ *       - users
  *     responses:
  *       '200':
  *         description: A successful response, added new user
@@ -60,6 +68,8 @@ const {
  * /api/users/signin:
  *   post:
  *     description: Use to log in
+ *     tags:
+ *       - users
  *     responses:
  *       '200':
  *         description: A successful response, user logged in

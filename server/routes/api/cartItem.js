@@ -11,6 +11,8 @@ const {
  * /api/cartItems:
  *   get:
  *     description: Use to request all cart items
+ *     tags:
+ *       - cart items
  *     responses:
  *       '200':
  *         description: A successful response, returned all cart items
