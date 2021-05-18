@@ -25,6 +25,12 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned all roles
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  *   post:
@@ -34,6 +40,12 @@ const {
  *     responses:
  *       '201':
  *         description: Created, added new role
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  * /api/roles/:id:
@@ -44,6 +56,14 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned role
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or requires admin role
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  *   put:
@@ -53,6 +73,14 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, updated role
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  *   delete:
@@ -62,6 +90,14 @@ const {
  *     responses:
  *       '204':
  *         description: No content, deleted role
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  */

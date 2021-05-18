@@ -44,6 +44,8 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned product
+ *       '400':
+ *         description: Bad request, wrong id format
  *       '500':
  *         description: Internal server error
  *   put:

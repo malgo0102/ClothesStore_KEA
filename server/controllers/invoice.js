@@ -32,11 +32,11 @@ const addInvoice = asyncHandler(async (req, res) => {
     const invoice = await dbConfig.Invoice.create(req.body.invoice, {
       transaction: t,
     });
-    const cart_items = await dbConfig.CartItem.create(req.body.cart_item, {
-      transaction: t,
-    });
     // https://nodejs.dev/learn/understanding-javascript-promises
     // Synchronize different promises
+    const cart_items = await dbConfig.CartItem.create(req.body.cart_items, {
+      transaction: t,
+    });
     Promise.all([invoice, cart_items])
       .then(() => t.commit())
       .then(data => res.status(201).json(data))

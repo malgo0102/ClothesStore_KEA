@@ -26,6 +26,10 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '404':
  *         description: Page not found
  *       '500':
@@ -38,6 +42,12 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or requires employee or admin role
  *       '404':
  *         description: Page not found
  *       '500':
@@ -49,6 +59,12 @@ const {
  *     responses:
  *       '204':
  *         description: No content, deleted user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '404':
  *         description: Page not found
  *       '500':
@@ -63,6 +79,8 @@ const {
  *         description: Created, added new user
  *       '404':
  *         description: Page not found
+ *       '409':
+ *         description: Conflict, user already exists
  *       '500':
  *         description: Internal server error
  * /api/users/signin:

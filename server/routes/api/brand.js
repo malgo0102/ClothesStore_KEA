@@ -41,9 +41,30 @@ const {
  *     description: Use to request brand
  *     tags:
  *       - brands
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the brand to return
+ *         schema:
+ *           type: integer
  *     responses:
  *       '200':
  *         description: A successful response, returned brand
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 2
+ *                 name:
+ *                   type: string
+ *                   example: Zara
+ *                 description:
+ *                   type: string
+ *                   example It is Spanish
  *       '500':
  *         description: Internal server error
  *   put:
