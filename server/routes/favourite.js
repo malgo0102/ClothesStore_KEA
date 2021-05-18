@@ -14,6 +14,40 @@ const {
   deleteFavourite,
 } = require('../controllers/favourite');
 
+/**
+ * @swagger
+ * /api/favourites:
+ *   get:
+ *     description: Use to request all favourite products
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned all favourite products
+ *       '500':
+ *         description: Internal server error
+ *   post:
+ *     description: Use to add favourite product
+ *     responses:
+ *       '200':
+ *         description: A successful response, added favourite product
+ *       '500':
+ *         description: Internal server error
+ * /api/favourites/:id:
+ *   get:
+ *     description: Use to request favourite product
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned favourite product
+ *       '500':
+ *         description: Internal server error
+ *   delete:
+ *     description: Use to delete favourite product
+ *     responses:
+ *       '200':
+ *         description: A successful response, deleted favourite product
+ *       '500':
+ *         description: Internal server error
+ */
+
 router.get('/', [authJwt.verifyToken, getAllFavourites]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, getFavourite]);
 router.post('/', [authJwt.verifyToken, addFavourite]);

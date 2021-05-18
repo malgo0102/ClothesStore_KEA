@@ -13,6 +13,33 @@ const {
   addInvoice,
 } = require('../controllers/invoice');
 
+/**
+ * @swagger
+ * /api/invoices:
+ *   get:
+ *     description: Use to request all invoices
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned all invoices
+ *       '500':
+ *         description: Internal server error
+ *   post:
+ *     description: Use to add invoice
+ *     responses:
+ *       '200':
+ *         description: A successful response, added invoice
+ *       '500':
+ *         description: Internal server error
+ * /api/invoices/:id:
+ *   get:
+ *     description: Use to request invoice
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned invoice
+ *       '500':
+ *         description: Internal server error
+ */
+
 router.get('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoice]);
 router.post('/', addInvoice);

@@ -29,7 +29,7 @@ const getBrand = async (req, res) => {
 const addBrand = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Brand.create(req.body)
-      .then(data => res.json(data))
+      .then(data => res.status(200).json(data))
       .catch(err => {
         console.log(err);
         return res.send(err);
