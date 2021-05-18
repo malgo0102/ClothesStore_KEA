@@ -32,8 +32,8 @@ const {
  *     tags:
  *       - products
  *     responses:
- *       '200':
- *         description: A successful response, added product
+ *       '201':
+ *         description: Created, added new product
  *       '500':
  *         description: Internal server error
  * /api/products/:id:

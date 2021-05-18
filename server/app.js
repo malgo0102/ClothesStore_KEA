@@ -30,7 +30,6 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 // Create endpoint with documentation, and serve generated documentation with SwaggerUi module
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-// https://nodejs.org/api/esm.html#esm_enabling - rename index.js to index.js
 
 app.use(express.urlencoded({
   extended: false,

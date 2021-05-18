@@ -32,8 +32,8 @@ const {
  *     tags:
  *       - roles
  *     responses:
- *       '200':
- *         description: A successful response, added role
+ *       '201':
+ *         description: Created, added new role
  *       '500':
  *         description: Internal server error
  * /api/roles/:id:

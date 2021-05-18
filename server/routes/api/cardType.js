@@ -32,8 +32,8 @@ const {
  *     tags:
  *       - cards
  *     responses:
- *       '200':
- *         description: A successful response, added card type
+ *       '201':
+ *         description: Created, added new card type
  *       '500':
  *         description: Internal server error
  * /api/cards/:id:

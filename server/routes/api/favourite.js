@@ -31,8 +31,8 @@ const {
  *     tags:
  *       - favourites
  *     responses:
- *       '200':
- *         description: A successful response, added favourite product
+ *       '201':
+ *         description: Created, added new favourite product
  *       '500':
  *         description: Internal server error
  * /api/favourites/:id:

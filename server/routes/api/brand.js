@@ -32,8 +32,8 @@ const {
  *     tags:
  *       - brands
  *     responses:
- *       '200':
- *         description: A successful response, added brand
+ *       '201':
+ *         description: Created, added new brand
  *       '500':
  *         description: Internal server error
  * /api/brands/:id:

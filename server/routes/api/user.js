@@ -59,8 +59,8 @@ const {
  *     tags:
  *       - users
  *     responses:
- *       '200':
- *         description: A successful response, added new user
+ *       '201':
+ *         description: Created, added new user
  *       '404':
  *         description: Page not found
  *       '500':

@@ -26,12 +26,13 @@ const {
  *       '500':
  *         description: Internal server error
  *   post:
- *     description: Use to add invoice
+ *     description: Use to add invoice and add cart item - SQL transaction
  *     tags:
  *       - invoices
+ *       - cart items
  *     responses:
- *       '200':
- *         description: A successful response, added invoice
+ *       '201':
+ *         description: Created, added new invoice and cart item
  *       '500':
  *         description: Internal server error
  * /api/invoices/:id:
