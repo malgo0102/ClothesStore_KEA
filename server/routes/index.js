@@ -2,14 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
-const brandsRoutes = require('./brand.js');
-const cardTypesRoutes = require('./cardType.js');
-const cartItemsRoutes = require('./cartItem.js');
-const favouritesRoutes = require('./favourite.js');
-const invoicesRoutes = require('./invoice.js');
-const productRoutes = require('./product.js');
-const rolesRoutes = require('./role.js');
-const userRoutes = require('./user.js');
+const brandsRoutes = require('./api/brand.js');
+const cardTypesRoutes = require('./api/cardType.js');
+const cartItemsRoutes = require('./api/cartItem.js');
+const favouritesRoutes = require('./api/favourite.js');
+const invoicesRoutes = require('./api/invoice.js');
+const productRoutes = require('./api/product.js');
+const rolesRoutes = require('./api/role.js');
+const userRoutes = require('./api/user.js');
 
 router.use('/brands', brandsRoutes);
 router.use('/cards', cardTypesRoutes);

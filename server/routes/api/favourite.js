@@ -1,7 +1,7 @@
 import {
   authJwt,
   authParams,
-} from '../middlewares/auth';
+} from '../../middlewares/auth';
 
 const express = require('express');
 
@@ -12,7 +12,7 @@ const {
   getFavourite,
   addFavourite,
   deleteFavourite,
-} = require('../controllers/favourite');
+} = require('../../controllers/favourite');
 
 /**
  * @swagger

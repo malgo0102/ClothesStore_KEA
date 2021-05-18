@@ -1,7 +1,7 @@
 import {
   authJwt,
   authParams,
-} from '../middlewares/auth';
+} from '../../middlewares/auth';
 
 const express = require('express');
 
@@ -13,7 +13,7 @@ const {
   updateRole,
   addRole,
   deleteRole,
-} = require('../controllers/role');
+} = require('../../controllers/role');
 
 /**
  * @swagger

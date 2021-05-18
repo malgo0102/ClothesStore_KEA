@@ -1,7 +1,7 @@
 import {
   authJwt,
   authParams,
-} from '../middlewares/auth';
+} from '../../middlewares/auth';
 
 const express = require('express');
 
@@ -13,7 +13,7 @@ const {
   updateProduct,
   addProduct,
   deleteProduct,
-} = require('../controllers/product');
+} = require('../../controllers/product');
 
 /**
  * @swagger

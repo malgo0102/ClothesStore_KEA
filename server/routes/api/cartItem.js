@@ -4,7 +4,7 @@ const router = express.Router();
 
 const {
   getAllCartItems,
-} = require('../controllers/cartItem');
+} = require('../../controllers/cartItem');
 
 /**
  * @swagger
