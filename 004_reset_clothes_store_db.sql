@@ -1,3 +1,5 @@
+USE clothes_store;
+
 DELETE FROM favourite_products;
 DELETE FROM cart_items;
 DELETE FROM invoices;

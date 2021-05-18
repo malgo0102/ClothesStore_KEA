@@ -37,10 +37,9 @@ const addInvoice = asyncHandler(async (req, res) => {
     // https://nodejs.dev/learn/understanding-javascript-promises
     // Synchronize different promises
     Promise.all([invoice, cart_items])
+        .then(() => t.commit())
         .then(data => res.status(200).json(data))
         .catch(err => res.send(err));
-
-    await t.commit().then(() => res.status(200));
   } catch (err) {
     await t.rollback().then(() => res.status(500).json(`Internal server error: ${err}`));
   }

@@ -3,6 +3,7 @@
 // 2. BoBaPass
 // 3. JaJo
 // 4. JaBo
+USE clothes_store;
 
 INSERT INTO brands (id, name, description) VALUES
 (1, 'H&M', 'It is Swedish'),
