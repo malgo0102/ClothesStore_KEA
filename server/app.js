@@ -18,20 +18,19 @@ const swaggerOptions = {
       title: 'Clothes store API',
       description: 'Web app for clothes shop management and clothes purchases',
       contact: {
-        keaID: 'mada0193, malg0102, said0390'
+        keaID: 'mada0193, malg0102, said0390',
       },
-      servers: ['http://localhost:8080']
-    }
+      servers: ['http://localhost:8080'],
+    },
   },
-  apis: ['app.js', './routes/*.js']
-}
+  apis: ['app.js', './routes/*.js'],
+};
 
 // Define swaggerDocs, pass in configuration
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 // Create endpoint with documentation, and serve generated documentation with SwaggerUi module
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // https://nodejs.org/api/esm.html#esm_enabling - rename index.js to index.js
-
 
 app.use(express.urlencoded({
   extended: false,
@@ -53,9 +52,9 @@ app.use(cors());
  */
 app.get('/', (req, res) => {
   res.status(200).send('Our API is running...')
-      .catch( () => {
-        res.status(500).json('Internal server error');
-      })
+    .catch(() => {
+      res.status(500).json('Internal server error');
+    });
 });
 
 app.use('/api', routes);

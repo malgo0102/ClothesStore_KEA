@@ -29,14 +29,14 @@ const getInvoice = async (req, res) => {
 const addInvoice = asyncHandler(async (req, res) => {
   const t = await dbConfig.Sequelize.transaction();
   try {
-    const invoice = await dbConfig.Invoice.create(req.body.invoice, { transaction: t })
+    const invoice = await dbConfig.Invoice.create(req.body.invoice, { transaction: t });
     const cart_items = await dbConfig.CartItem.create(req.body.cart_item, { transaction: t });
     // https://nodejs.dev/learn/understanding-javascript-promises
     // Synchronize different promises
     Promise.all([invoice, cart_items])
-        .then(() => t.commit())
-        .then(data => res.status(200).json(data))
-        .catch(err => res.send(err));
+      .then(() => t.commit())
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     await t.rollback().then(() => res.status(500).json(`Internal server error: ${err}`));
   }
@@ -61,7 +61,6 @@ const addInvoice = asyncHandler(async (req, res) => {
 //       "unit_price": 400
 // }
 // }
-
 
 module.exports.getAllInvoices = getAllInvoices;
 module.exports.getInvoice = getInvoice;
