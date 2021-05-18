@@ -29,9 +29,6 @@ const getInvoice = async (req, res) => {
 const addInvoice = asyncHandler(async (req, res) => {
   const t = await dbConfig.Sequelize.transaction();
   try {
-    console.log(req.body);
-    console.log(req.body.invoice);
-    console.log(req.body.cart_item);
     const invoice = await dbConfig.Invoice.create(req.body.invoice, { transaction: t })
     const cart_items = await dbConfig.CartItem.create(req.body.cart_item, { transaction: t });
     // https://nodejs.dev/learn/understanding-javascript-promises

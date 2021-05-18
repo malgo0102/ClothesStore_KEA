@@ -16,14 +16,13 @@ const swaggerOptions = {
   swaggerDefinition: {
     info: {
       title: 'Clothes store API',
-      description: 'Web shop management and purchases',
+      description: 'Web app for clothes shop management and clothes purchases',
       contact: {
         keaID: 'mada0193, malg0102, said0390'
       },
       servers: ['http://localhost:8080']
     }
   },
-  //'./server/routes/*.js'
   apis: ['app.js', './routes/*.js']
 }
 
