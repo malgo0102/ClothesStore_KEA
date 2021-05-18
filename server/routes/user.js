@@ -24,6 +24,8 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  * /api/users/:id:
@@ -32,6 +34,8 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, returned user
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  *   delete:
@@ -39,6 +43,8 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, deleted user
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  * /api/users/signup:
@@ -47,6 +53,8 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, added new user
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  * /api/users/signin:
@@ -55,6 +63,10 @@ const {
  *     responses:
  *       '200':
  *         description: A successful response, user logged in
+ *       '401':
+ *         description: Unauthorized user, credentials do not match
+ *       '404':
+ *         description: Page not found
  *       '500':
  *         description: Internal server error
  */

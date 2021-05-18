@@ -46,7 +46,8 @@ const updateBrand = async (req, res) => {
         id: req.params.id,
       },
     })
-      .catch(err => res.send(err));
+        .then(data => res.status(200).json(data))
+        .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
