@@ -10,12 +10,10 @@ const CartItem = sequelize.define('CartItem', {
   user_id: {
     type: INTEGER,
     allowNull: false,
-    primaryKey: true, // Sequelize will set a default 'id' field for a Model if we don't specify it
   },
   product_id: {
     type: INTEGER,
     allowNull: false,
-    primaryKey: true, // Setting two primary keys will create a 'composite key' in Sequelize
   },
   invoice_id: {
     type: INTEGER,

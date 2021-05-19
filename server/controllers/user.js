@@ -49,7 +49,7 @@ export const signUpUser = asyncHandler(async (req, res) => {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, process.env.BCRYPT_SALT),
+      password: bcrypt.hashSync(req.body.password, 12),
     };
     await dbConfig.User.create(newUser)
       .then(data => res.json(data))

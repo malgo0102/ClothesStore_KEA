@@ -68,19 +68,20 @@ CREATE TABLE invoices(
 );
 
 CREATE TABLE cart_items (
+  id INT(11) NOT NULL,
   user_id INT(11) NOT NULL,
   product_id INT(11) NOT NULL,
   invoice_id INT(11) NOT NULL,
   quantity INT(11) NOT NULL,
   unit_price FLOAT(11) NOT NULL,
 
-  PRIMARY KEY (user_id, product_id),
+  PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE,
   FOREIGN KEY (product_id) REFERENCES products(id)
         ON DELETE CASCADE,
   FOREIGN KEY (invoice_id) REFERENCES invoices(id)
-	ON DELETE CASCADE
+	      ON DELETE CASCADE
 
 );
 

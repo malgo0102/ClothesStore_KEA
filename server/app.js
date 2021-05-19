@@ -53,10 +53,12 @@ app.use(cors());
  *         description: Internal server error
  */
 app.get('/', (req, res) => {
-  res.status(200).send('Our API is running...')
-    .catch(() => {
-      res.status(500).json('Internal server error');
-    });
+  try {
+    return res.status(200).send('Our API is running...');
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json('Internal server error');
+  }
 });
 
 app.use('/api', routes);

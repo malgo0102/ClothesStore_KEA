@@ -29,6 +29,9 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 4. Navigate to http://localhost:8080 for the api (e.g. http://localhost:8080/api/users to GET all users)
 5. Navigate to http://localhost:4200 for the client application ( Not yet implemented )
 
+**Testing the API**
+1. Navigate to http://localhost:8080/api-docs
+2. Use the Swagger API development tool to test the API CRUD endpoints
 
 **Things to note**
 - Trying to sign in with a user created from the population scripts will not work due to the password hashing mechanism of the API user creation controller
