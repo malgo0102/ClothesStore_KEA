@@ -68,7 +68,7 @@ CREATE TABLE invoices(
 );
 
 CREATE TABLE cart_items (
-  id INT(11) NOT NULL,
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
   user_id INT(11) NOT NULL,
   product_id INT(11) NOT NULL,
   invoice_id INT(11) NOT NULL,
