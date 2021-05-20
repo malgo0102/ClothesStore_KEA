@@ -32,7 +32,7 @@ const {
  *     tags:
  *       - brands
  *     security:
- *       bearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: body
  *         name: brand
@@ -95,7 +95,7 @@ const {
  *     tags:
  *       - brands
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -120,7 +120,7 @@ const {
  *     tags:
  *       - brands
  *     security:
- *       bearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path

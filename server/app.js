@@ -22,16 +22,17 @@ const swaggerOptions = {
         keaID: 'mada0193, malg0102, said0390',
       },
       servers: ['http://localhost:8080'],
-    },
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: "http",
-          description: "Enter JWT Bearer token **_only_**",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-        }
-      }
+    }
+  },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        description: "Enter JWT Bearer token **_only_**",
+        in: "header",
+        bearerFormat: "JWT",
+      },
     }
   },
   apis: ['app.js', './routes/index.js', './routes/api/*.js'],
