@@ -29,15 +29,17 @@ const getInvoice = async (req, res) => {
 const addInvoice = asyncHandler(async (req, res) => {
   const t = await dbConfig.Sequelize.transaction();
   try {
-    const invoice = await dbConfig.Invoice.create(req.body.invoice, {
-      transaction: t,
-    });
+    const invoice = await dbConfig.Invoice.create(req.body.invoice,
+      { transaction: t, }
+    );
+    const cartItems = Promise.all(req.body.cart_items.map( cartItem =>
+        (dbConfig.CartItem.create(cartItem),
+        { transaction: t, }
+      ))).catch(err => res.send(err));
+
     // https://nodejs.dev/learn/understanding-javascript-promises
     // Synchronize different promises
-    const cart_items = await dbConfig.CartItem.create(req.body.cart_items, {
-      transaction: t,
-    });
-    Promise.all([invoice, cart_items])
+    Promise.all([invoice].concat(cartItems))
       .then(() => t.commit())
       .then(data => res.status(201).json(data))
       .catch(err => res.send(err));
@@ -51,19 +53,26 @@ const addInvoice = asyncHandler(async (req, res) => {
 // {
 //   "invoice": {
 //   "id": 3,
-//       "card_type_id": 1,
-//       "card_number": 11223344,
-//       "card_holder": "Bob Bayes",
-//       "date": "2020-06-26T15:45:00.000Z",
-//       "total_price": 1600
+//     "card_type_id": 1,
+//     "card_number": 11223344,
+//     "card_holder": "Bob Bayes",
+//     "date": "2020-06-26T15:45:00.000Z",
+//     "total_price": 2600
 // },
-//   "cart_item": {
+//   "cart_items": [{
 //   "user_id": 1,
-//       "product_id": 3,
-//       "invoice_id": 3,
-//       "quantity": 4,
-//       "unit_price": 400
-// }
+//   "product_id": 3,
+//   "invoice_id": 3,
+//   "quantity": 4,
+//   "unit_price": 400
+// },
+//   {
+//     "user_id": 1,
+//     "product_id": 2,
+//     "invoice_id": 3,
+//     "quantity": 2,
+//     "unit_price": 1000
+//   }]
 // }
 
 module.exports.getAllInvoices = getAllInvoices;

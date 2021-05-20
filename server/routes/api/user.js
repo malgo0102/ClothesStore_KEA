@@ -23,6 +23,8 @@ const {
  *     description: Use to request all users
  *     tags:
  *       - users
+ *     security:
+ *       bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
@@ -34,11 +36,21 @@ const {
  *         description: Page not found
  *       '500':
  *         description: Internal server error
- * /api/users/:id:
+ * /api/users/{id}:
  *   get:
  *     description: Use to request user
  *     tags:
  *       - users
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to return
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, returned user
@@ -56,6 +68,16 @@ const {
  *     description: Use to delete user
  *     tags:
  *       - users
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to delete
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '204':
  *         description: No content, deleted user

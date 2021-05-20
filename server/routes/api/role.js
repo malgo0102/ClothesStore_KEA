@@ -22,6 +22,8 @@ const {
  *     description: Use to request all roles
  *     tags:
  *       - roles
+ *     security:
+ *       bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all roles
@@ -37,6 +39,8 @@ const {
  *     description: Use to add role
  *     tags:
  *       - roles
+ *     security:
+ *       bearerAuth: []
  *     responses:
  *       '201':
  *         description: Created, added new role
@@ -48,11 +52,21 @@ const {
  *         description: Page not found
  *       '500':
  *         description: Internal server error
- * /api/roles/:id:
+ * /api/roles/{id}:
  *   get:
  *     description: Use to request role
  *     tags:
  *       - roles
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the role to return
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, returned role
@@ -70,6 +84,16 @@ const {
  *     description: Use to update role
  *     tags:
  *       - roles
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the role to update
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, updated role
@@ -87,6 +111,16 @@ const {
  *     description: Use to delete role
  *     tags:
  *       - roles
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the role to delete
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '204':
  *         description: No content, deleted role

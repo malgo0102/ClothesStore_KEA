@@ -31,12 +31,18 @@ const {
  *     description: Use to add brand
  *     tags:
  *       - brands
+ *     security:
+ *       bearerAuth: []
  *     responses:
  *       '201':
  *         description: Created, added new brand
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require employee or admin role
  *       '500':
  *         description: Internal server error
- * /api/brands/:id:
+ * /api/brands/{id}:
  *   get:
  *     description: Use to request brand
  *     tags:
@@ -48,6 +54,7 @@ const {
  *         description: The ID of the brand to return
  *         schema:
  *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, returned brand
@@ -58,31 +65,66 @@ const {
  *               properties:
  *                 id:
  *                   type: integer
- *                   example: 2
  *                 name:
  *                   type: string
- *                   example: Zara
  *                 description:
  *                   type: string
- *                   example It is Spanish
+ *                 example:
+ *                   id: 2
+ *                   name: Zara
+ *                   description: It is Spanish
+ *       '400':
+ *         description: Bad request, wrong id format
  *       '500':
  *         description: Internal server error
  *   put:
  *     description: Use to update brand
  *     tags:
  *       - brands
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the brand to update
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, updated brand
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require employee or admin role
  *       '500':
  *         description: Internal server error
  *   delete:
  *     description: Use to delete brand
  *     tags:
  *       - brands
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the brand to delete
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '204':
  *         description: No content, deleted brand
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '500':
  *         description: Internal server error
  */
