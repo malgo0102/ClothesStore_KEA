@@ -33,6 +33,17 @@ const {
  *       - cards
  *     security:
  *       bearerAuth: []
+ *     parameters:
+ *       - in: body
+ *         name: cardType
+ *         description: The card type to create
+ *         schema:
+ *           type: object
+ *           required:
+ *            - name
+ *           properties:
+ *             name:
+ *               type: string
  *     responses:
  *       '201':
  *         description: Created, added new card type

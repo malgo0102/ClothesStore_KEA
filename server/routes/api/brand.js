@@ -32,7 +32,20 @@ const {
  *     tags:
  *       - brands
  *     security:
- *       bearerAuth: []
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: body
+ *         name: brand
+ *         description: The brand to create
+ *         schema:
+ *           type: object
+ *           required:
+ *            - name
+ *           properties:
+ *             name:
+ *               type: string
+ *             description:
+ *               type: string
  *     responses:
  *       '201':
  *         description: Created, added new brand
@@ -82,7 +95,7 @@ const {
  *     tags:
  *       - brands
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -107,7 +120,7 @@ const {
  *     tags:
  *       - brands
  *     security:
- *       bearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
