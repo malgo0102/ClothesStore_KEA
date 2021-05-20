@@ -80,7 +80,7 @@ CREATE TABLE cart_items (
   FOREIGN KEY (product_id) REFERENCES products(id)
         ON DELETE CASCADE,
   FOREIGN KEY (invoice_id) REFERENCES invoices(id)
-	ON DELETE CASCADE
+	      ON DELETE CASCADE
 
 );
 

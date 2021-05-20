@@ -36,11 +36,11 @@ INSERT INTO invoices (id, card_type_id, card_number, card_holder, date, total_pr
 (1, 1, 11223344, 'Bob Bayes', TIMESTAMP('2020-06-26 15:45'), 11500),
 (2, 1, 33442255, 'James Jimick', TIMESTAMP('2020-08-11 20:45'), 2000);
 
-INSERT INTO cart_items (user_id, product_id, invoice_id, quantity, unit_price) VALUES
-(1, 1, 2, 5, 400),
-(1, 2, 2, 2, 1000),
-(2, 2, 1, 2, 1000),
-(2, 3, 1, 1, 7500);
+INSERT INTO cart_items (id, user_id, product_id, invoice_id, quantity, unit_price) VALUES
+(1, 1, 1, 2, 5, 400),
+(2, 1, 2, 2, 2, 1000),
+(3, 2, 2, 1, 2, 1000),
+(4, 2, 3, 1, 1, 7500);
 
 INSERT INTO favourite_products (product_id, user_id) VALUES
 (1, 2),
