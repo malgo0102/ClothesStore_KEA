@@ -33,6 +33,28 @@ const {
  *       - products
  *     security:
  *       bearerAuth: []
+ *     parameters:
+ *       - in: body
+ *         name: product
+ *         description: The product to create
+ *         schema:
+ *           type: object
+ *           required:
+ *             - brand_id
+ *             - name
+ *             - unit_price
+ *             - size
+ *           properties:
+ *             brand_id:
+ *               type: integer
+ *             name:
+ *               type: string
+ *             unit_price:
+ *               type: number
+ *             description:
+ *               type: string
+ *             size:
+ *               type: string
  *     responses:
  *       '201':
  *         description: Created, added new product

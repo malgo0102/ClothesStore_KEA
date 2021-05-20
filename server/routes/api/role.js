@@ -41,6 +41,17 @@ const {
  *       - roles
  *     security:
  *       bearerAuth: []
+ *     parameters:
+ *       - in: body
+ *         name: role
+ *         description: The role to create
+ *         schema:
+ *           type: object
+ *           required:
+ *            - name
+ *           properties:
+ *             name:
+ *               type: string
  *     responses:
  *       '201':
  *         description: Created, added new role

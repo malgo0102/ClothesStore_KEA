@@ -49,30 +49,32 @@ const addInvoice = asyncHandler(async (req, res) => {
 });
 
 // for testing in postman:
-// http://localhost:8080/api/invoices/
+http://localhost:8080/api/invoices/
 // {
 //   "invoice": {
-//   "id": 3,
+//     "id": 3,
 //     "card_type_id": 1,
 //     "card_number": 11223344,
 //     "card_holder": "Bob Bayes",
 //     "date": "2020-06-26T15:45:00.000Z",
 //     "total_price": 2600
-// },
-//   "cart_items": [{
-//   "user_id": 1,
-//   "product_id": 3,
-//   "invoice_id": 3,
-//   "quantity": 4,
-//   "unit_price": 400
-// },
-//   {
-//     "user_id": 1,
-//     "product_id": 2,
-//     "invoice_id": 3,
-//     "quantity": 2,
-//     "unit_price": 1000
-//   }]
+//   },
+//   "cart_items": [
+//     {
+//       "user_id": 1,
+//       "product_id": 3,
+//       "invoice_id": 3,
+//       "quantity": 4,
+//       "unit_price": 400
+//     },
+//     {
+//       "user_id": 1,
+//       "product_id": 2,
+//       "invoice_id": 3,
+//       "quantity": 2,
+//       "unit_price": 1000
+//     }
+//   ]
 // }
 
 module.exports.getAllInvoices = getAllInvoices;
