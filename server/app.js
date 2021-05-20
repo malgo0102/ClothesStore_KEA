@@ -17,11 +17,22 @@ const swaggerOptions = {
     info: {
       title: 'Clothes store API',
       description: 'Web app for clothes shop management and clothes purchases',
+      version: "1.0.1",
       contact: {
         keaID: 'mada0193, malg0102, said0390',
       },
       servers: ['http://localhost:8080'],
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          description: "Enter JWT Bearer token **_only_**",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        }
+      }
+    }
   },
   apis: ['app.js', './routes/index.js', './routes/api/*.js'],
 };
@@ -30,7 +41,6 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 // Create endpoint with documentation, and serve generated documentation with SwaggerUi module
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-// https://nodejs.org/api/esm.html#esm_enabling - rename index.js to index.js
 
 app.use(express.urlencoded({
   extended: false,

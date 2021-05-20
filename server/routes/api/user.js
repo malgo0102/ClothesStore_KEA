@@ -23,21 +23,43 @@ const {
  *     description: Use to request all users
  *     tags:
  *       - users
+ *     security:
+ *       bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '404':
  *         description: Page not found
  *       '500':
  *         description: Internal server error
- * /api/users/:id:
+ * /api/users/{id}:
  *   get:
  *     description: Use to request user
  *     tags:
  *       - users
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to return
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, returned user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or requires employee or admin role
  *       '404':
  *         description: Page not found
  *       '500':
@@ -46,9 +68,25 @@ const {
  *     description: Use to delete user
  *     tags:
  *       - users
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to delete
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '204':
  *         description: No content, deleted user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '404':
  *         description: Page not found
  *       '500':
@@ -59,10 +97,12 @@ const {
  *     tags:
  *       - users
  *     responses:
- *       '200':
- *         description: A successful response, added new user
+ *       '201':
+ *         description: Created, added new user
  *       '404':
  *         description: Page not found
+ *       '409':
+ *         description: Conflict, user already exists
  *       '500':
  *         description: Internal server error
  * /api/users/signin:

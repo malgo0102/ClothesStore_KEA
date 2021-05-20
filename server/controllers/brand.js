@@ -18,6 +18,7 @@ const getAllBrands = async (req, res) => {
 
 const getBrand = async (req, res) => {
   try {
+    console.log("yello");
     await dbConfig.Brand.findByPk(req.params.id)
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));
@@ -29,7 +30,7 @@ const getBrand = async (req, res) => {
 const addBrand = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Brand.create(req.body)
-      .then(data => res.status(200).json(data))
+      .then(data => res.status(201).json(data))
       .catch(err => {
         console.log(err);
         return res.send(err);

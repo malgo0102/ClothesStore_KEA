@@ -52,7 +52,7 @@ export const signUpUser = asyncHandler(async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 12),
     };
     await dbConfig.User.create(newUser)
-      .then(data => res.json(data))
+      .then(data => res.status(201).json(data))
       .catch(err => res.status(404).send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');

@@ -20,28 +20,51 @@ const {
  *     description: Use to request all invoices
  *     tags:
  *       - invoices
+ *     security:
+ *       bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all invoices
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require employee or admin role
  *       '500':
  *         description: Internal server error
  *   post:
- *     description: Use to add invoice
+ *     description: Use to add invoice and add cart item - SQL transaction
  *     tags:
  *       - invoices
+ *       - cart items
  *     responses:
- *       '200':
- *         description: A successful response, added invoice
+ *       '201':
+ *         description: Created, added new invoice and cart item
  *       '500':
  *         description: Internal server error
- * /api/invoices/:id:
+ * /api/invoices/{id}:
  *   get:
  *     description: Use to request invoice
  *     tags:
  *       - invoices
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the invoice to return
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, returned invoice
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '500':
  *         description: Internal server error
  */

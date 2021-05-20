@@ -31,37 +31,85 @@ const {
  *     description: Use to add product
  *     tags:
  *       - products
+ *     security:
+ *       bearerAuth: []
  *     responses:
- *       '200':
- *         description: A successful response, added product
+ *       '201':
+ *         description: Created, added new product
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin or employee role
  *       '500':
  *         description: Internal server error
- * /api/products/:id:
+ * /api/products/{id}:
  *   get:
  *     description: Use to request product
  *     tags:
  *       - products
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the product to return
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, returned product
+ *       '400':
+ *         description: Bad request, wrong id format
  *       '500':
  *         description: Internal server error
  *   put:
  *     description: Use to update product
  *     tags:
  *       - products
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the product to update
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '200':
  *         description: A successful response, updated product
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin or employee role
  *       '500':
  *         description: Internal server error
  *   delete:
  *     description: Use to delete product
  *     tags:
  *       - products
+ *     security:
+ *       bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the product to delete
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       '204':
  *         description: No content, deleted product
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
  *       '500':
  *         description: Internal server error
  */
