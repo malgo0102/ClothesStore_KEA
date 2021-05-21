@@ -21,6 +21,7 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 **Creating database**
 1. 001_create_clothes_store_db.sql: Contains all scripts to create new database and add a new user to it
 2. 002_populate_clothes_store_db.sql: Contains scripts to populate the database with data
+3. 004_reset_clothes_store_db.sql: Contains scripts to delete db content and repopulate it
 
 **Running the app**
 1. Navigate to the folder server folder
@@ -33,22 +34,31 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 1. Navigate to http://localhost:8080/api-docs
 2. Use the Swagger API development tool to test the API CRUD endpoints
 
-**Things to note**
-- Trying to sign in with a user created from the population scripts will not work due to the password hashing mechanism of the API user creation controller
-- To sign in, add a new user with the Postman API testing application
+**Sign in - things to note**
+To sign in after the database was populated use credentials:  
+- sign in as ADMIN with rights to do all operations (role ID 1)
+    email: jamesjimick@mystore.com 
+    password: JaJiPass
+- sign in as EMPLOYEE (role ID 2)
+    email: bobbayes@mystore.com
+    password: BoBaPass
+- sign in as CUSTOMER (role ID 3)
+    email: jamiejoe@mystore.com
+    password: JaJo
+- To sign up, add a new user with Swagger or Postman API testing application
 
-**Data to use with Postman to sign in**
+**Data to use with Postman to sign up as a CUSTOMER**
 1. POST a new user to the API route http://localhost:8080/api/users
     - {
         "role_id": 3,
         "first_name": "new",
         "last_name": "user",
-        "email": "newuser@gmail.com",
+        "email": "newuser@email.com",
         "password": "newpass"
        }
     
 2. POST sign in credentials to sign in with the new user at http://localhost:8080/api/users/signin
     - {
-        "email": "newuser@gmail.com",
+        "email": "newuser@email.com",
         "password": "newpass"
        }   
