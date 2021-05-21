@@ -1,8 +1,8 @@
-// users passwords before hashing:
-// 1. JaJiPass
-// 2. BoBaPass
-// 3. JaJo
-// 4. JaBo
+# users passwords before hashing:
+# 1. JaJiPass
+# 2. BoBaPass
+# 3. JaJo
+# 4. JaBo
 USE clothes_store;
 
 INSERT INTO brands (id, name, description) VALUES
