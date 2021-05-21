@@ -1,3 +1,9 @@
+# users passwords before hashing:
+# 1. JaJiPass
+# 2. BoBaPass
+# 3. JaJo
+# 4. JaBo
+
 USE clothes_store;
 
 DELETE FROM favourite_products;
