@@ -21,7 +21,7 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 **Creating database**
 1. 001_create_clothes_store_db.sql: Contains all scripts to create new database and add a new user to it
 2. 002_populate_clothes_store_db.sql: Contains scripts to populate the database with data
-3. 004_reset_clothes_store_db.sql: Contains scripts to delete db content and repopulate it
+3. 003_reset_clothes_store_db.sql: Contains scripts to delete db content and repopulate it
 
 **Running the app**
 1. Navigate to the folder server folder
