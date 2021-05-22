@@ -28,14 +28,11 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getUsersByView = async (req, res) => {
+export const getUsersWithView = async (req, res) => {
   try {
     const query = 'SELECT * FROM v_users';
 
-    await dbConfig.Sequelize.query(
-      query,
-      { type: dbConfig.Sequelize.QueryTypes.SELECT },
-    )
+    await dbConfig.Sequelize.query(query, { type: dbConfig.Sequelize.QueryTypes.SELECT })
       .then(data => res.status(200).json(data))
       .catch(err => res.status(404).send(err));
   } catch (err) {
@@ -44,14 +41,11 @@ export const getUsersByView = async (req, res) => {
   }
 };
 
-export const getUsersInfoByView = async (req, res) => {
+export const getUsersInfoWithView = async (req, res) => {
   try {
     const query = 'SELECT * FROM v_users_info';
 
-    await dbConfig.Sequelize.query(
-      query,
-      { type: dbConfig.Sequelize.QueryTypes.SELECT },
-    )
+    await dbConfig.Sequelize.query(query, { type: dbConfig.Sequelize.QueryTypes.SELECT })
       .then(data => res.status(200).json(data))
       .catch(err => res.status(404).send(err));
   } catch (err) {

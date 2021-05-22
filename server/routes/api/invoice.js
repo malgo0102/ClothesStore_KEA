@@ -10,6 +10,8 @@ const router = express.Router();
 const {
   getAllInvoices,
   getInvoice,
+  getUserOrdersWithProcedure,
+  getInvoicesBetweenDatesWithProcedure,
   addInvoice,
 } = require('../../controllers/invoice');
 
@@ -113,6 +115,8 @@ const {
 
 router.get('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoice]);
+router.get('/:from_date/:to_date', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoicesBetweenDatesWithProcedure]);
+router.get('/orders/:id', [authParams.verifyIdParam, authJwt.verifyToken, getUserOrdersWithProcedure]);
 router.post('/', addInvoice);
 
 module.exports = router;

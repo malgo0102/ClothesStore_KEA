@@ -11,8 +11,8 @@ const router = express.Router();
 const {
   getAllUsers,
   getUser,
-  getUsersByView,
-  getUsersInfoByView,
+  getUsersWithView,
+  getUsersInfoWithView,
   signInUser,
   signUpUser,
   deleteUser,
@@ -162,8 +162,8 @@ const {
 
 router.get('/', [authJwt.verifyToken, authJwt.isAdmin, getAllUsers]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getUser]);
-router.get('/views/users', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getUsersByView]);
-router.get('/views/usersinfo', [authJwt.verifyToken, authJwt.isAdmin, getUsersInfoByView]);
+router.get('/views/users', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getUsersWithView]);
+router.get('/views/usersinfo', [authJwt.verifyToken, authJwt.isAdmin, getUsersInfoWithView]);
 router.post('/signup', [authVerification.verifyNewUser, signUpUser]);
 router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteUser]);
 router.post('/signin', [authVerification.verifyExistingUser, signInUser]);
