@@ -49,7 +49,7 @@ const addInvoice = asyncHandler(async (req, res) => {
 });
 
 // for testing in postman:
-http://localhost:8080/api/invoices/
+// http://localhost:8080/api/invoices/
 // {
 //   "invoice": {
 //     "id": 3,

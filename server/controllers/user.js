@@ -28,6 +28,38 @@ export const getUser = async (req, res) => {
   }
 };
 
+export const getUsersByView = async (req, res) => {
+  try {
+    const query = 'SELECT * FROM v_users';
+
+    await dbConfig.Sequelize.query(
+      query,
+      { type: dbConfig.Sequelize.QueryTypes.SELECT },
+    )
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json('Internal server error');
+  }
+};
+
+export const getUsersInfoByView = async (req, res) => {
+  try {
+    const query = 'SELECT * FROM v_users_info';
+
+    await dbConfig.Sequelize.query(
+      query,
+      { type: dbConfig.Sequelize.QueryTypes.SELECT },
+    )
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json('Internal server error');
+  }
+};
+
 export const deleteUser = async (req, res) => {
   try {
     await dbConfig.User.destroy({
@@ -42,6 +74,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
+// Authentication functions (Sign up / Sign in)
 export const signUpUser = asyncHandler(async (req, res) => {
   try {
     const newUser = {
