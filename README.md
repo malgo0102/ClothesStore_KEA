@@ -34,15 +34,15 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 1. Navigate to http://localhost:8080/api-docs
 2. Use the Swagger API development tool to test the API CRUD endpoints
 
-**Sign in - things to note**
-To sign in after the database was populated use credentials:  
-- sign in as ADMIN with rights to do all operations (role ID 1)
+**Sign in - things to note**\
+To sign in after the database was populated use credentials:\  
+- sign in as ADMIN with rights to do all operations (role ID 1)\
     email: jamesjimick@mystore.com 
     password: JaJiPass
-- sign in as EMPLOYEE (role ID 2)
+- sign in as EMPLOYEE (role ID 2)\
     email: bobbayes@mystore.com
     password: BoBaPass
-- sign in as CUSTOMER (role ID 3)
+- sign in as CUSTOMER (role ID 3)\
     email: jamiejoe@mystore.com
     password: JaJo
 - To sign up, add a new user with Swagger or Postman API testing application
