@@ -25,23 +25,6 @@ const getProduct = async (req, res) => {
   }
 };
 
-const getDiscountedProductsWithProcedure = async (req, res) => {
-  try {
-    const query = 'CALL get_products_with_discount(:brand_name, :discount);';
-
-    await dbConfig.Sequelize.query(query, {
-      replacements: {
-        brand_name: req.params.brand_name,
-        discount: req.params.discount,
-      },
-    })
-      .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-};
-
 const addProduct = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Product.create(req.body)
@@ -82,7 +65,6 @@ const deleteProduct = async (req, res) => {
 
 module.exports.getAllProducts = getAllProducts;
 module.exports.getProduct = getProduct;
-module.exports.getDiscountedProductsWithProcedure = getDiscountedProductsWithProcedure;
 module.exports.addProduct = addProduct;
 module.exports.updateProduct = updateProduct;
 module.exports.deleteProduct = deleteProduct;
