@@ -10,7 +10,6 @@ const router = express.Router();
 const {
   getAllProducts,
   getProduct,
-  getDiscountedProductsWithProcedure,
   updateProduct,
   addProduct,
   deleteProduct,
@@ -139,7 +138,6 @@ const {
 
 router.get('/', getAllProducts);
 router.get('/:id', [authParams.verifyIdParam, getProduct]);
-router.get('/:brand_name/:discount', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getDiscountedProductsWithProcedure]);
 router.post('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, addProduct]);
 router.put('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, updateProduct]);
 router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteProduct]);

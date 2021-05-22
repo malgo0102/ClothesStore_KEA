@@ -13,7 +13,7 @@ CREATE TABLE brands (
 
 CREATE TABLE products (
   id INT AUTO_INCREMENT NOT NULL UNIQUE,
-  brand_id INT NOT NULL,
+  brand_id INT,
   name VARCHAR(120) NOT NULL UNIQUE,
   unit_price FLOAT(11) NOT NULL,
   description VARCHAR(255) NOT NULL,
@@ -104,3 +104,16 @@ ON clothes_store.*
 TO admin@localhost;
 
 SELECT user FROM mysql.user;
+
+# TRIGGERS
+DELIMITER
+$$
+    CREATE TRIGGER brands_before_delete
+        AFTER DELETE ON brands
+            FOR EACH ROW
+            BEGIN
+                UPDATE products
+                    SET products.brand_id = NULL
+                    WHERE brand_id = OLD.id;
+            END $$
+DELIMITER ;
