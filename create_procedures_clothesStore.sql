@@ -1,18 +1,7 @@
 USE clothes_store;
-DROP PROCEDURE IF EXISTS get_products_with_discount;
-DROP PROCEDURE IF EXISTS get_orders_between_dates;
 
-DELIMITER $$
-    CREATE PROCEDURE get_products_with_discount(brand_name VARCHAR(255), discount FLOAT)
-        BEGIN
-            SELECT products.name AS product_name, (products.unit_price * (100 - discount) / 100) AS unit_price,
-                   products.rating AS rating, products.description AS product_description,
-                   brands.name AS brand_name, brands.description AS brand_description
-            FROM products
-            INNER JOIN brands ON products.brand_id = brands.id
-            WHERE brands.name = brand_name;
-        END $$
-DELIMITER ;
+DROP PROCEDURE IF EXISTS get_orders_between_dates;
+DROP PROCEDURE IF EXISTS get_user_orders;
 
 DELIMITER $$
     CREATE PROCEDURE get_orders_between_dates(from_date DATETIME, to_date DATETIME)
@@ -38,6 +27,5 @@ DELIMITER $$
         END $$
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE get_products_with_discount TO 'admin'@'localhost';
 GRANT EXECUTE ON PROCEDURE get_orders_between_dates TO 'admin'@'localhost';
 GRANT EXECUTE ON PROCEDURE get_user_orders TO 'admin'@'localhost';
