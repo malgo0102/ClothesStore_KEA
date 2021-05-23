@@ -1,3 +1,5 @@
+/* eslint-disable no-sequences */
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
@@ -25,17 +27,43 @@ const getInvoice = async (req, res) => {
   }
 };
 
+const getUserOrdersWithProcedure = async (req, res) => {
+  try {
+    const query = 'CALL get_user_orders(:user_id);';
+
+    await dbConfig.Sequelize.query(query, { replacements: { user_id: req.params.id } })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+const getInvoicesBetweenDatesWithProcedure = async (req, res) => {
+  try {
+    const query = 'CALL get_orders_between_dates(:from_date, :to_date);';
+
+    await dbConfig.Sequelize.query(query, {
+      replacements: {
+        from_date: req.params.from_date, to_date: req.params.to_date,
+      },
+    })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
 // Unmanaged transactions: https://sequelize.org/master/manual/transactions.html
 const addInvoice = asyncHandler(async (req, res) => {
   const t = await dbConfig.Sequelize.transaction();
   try {
     const invoice = await dbConfig.Invoice.create(req.body.invoice,
-      { transaction: t, }
-    );
-    const cartItems = Promise.all(req.body.cart_items.map( cartItem =>
-        (dbConfig.CartItem.create(cartItem),
-        { transaction: t, }
-      ))).catch(err => res.send(err));
+      { transaction: t });
+    const cartItems = Promise.all(req.body.cart_items.map(cartItem => (dbConfig.CartItem.create(cartItem),
+    { transaction: t }
+    ))).catch(err => res.send(err));
 
     // https://nodejs.dev/learn/understanding-javascript-promises
     // Synchronize different promises
@@ -49,7 +77,7 @@ const addInvoice = asyncHandler(async (req, res) => {
 });
 
 // for testing in postman:
-http://localhost:8080/api/invoices/
+// http://localhost:8080/api/invoices/
 // {
 //   "invoice": {
 //     "id": 3,
@@ -79,4 +107,6 @@ http://localhost:8080/api/invoices/
 
 module.exports.getAllInvoices = getAllInvoices;
 module.exports.getInvoice = getInvoice;
+module.exports.getUserOrdersWithProcedure = getUserOrdersWithProcedure;
+module.exports.getInvoicesBetweenDatesWithProcedure = getInvoicesBetweenDatesWithProcedure;
 module.exports.addInvoice = addInvoice;

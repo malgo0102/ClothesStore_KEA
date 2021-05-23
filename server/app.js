@@ -17,12 +17,12 @@ const swaggerOptions = {
     info: {
       title: 'Clothes store API',
       description: 'Web app for clothes shop management and clothes purchases',
-      version: "1.0.1",
+      version: '1.0.1',
       contact: {
         keaID: 'mada0193, malg0102, said0390',
       },
       servers: ['http://localhost:8080'],
-    }
+    },
   },
   components: {
     securitySchemes: {
@@ -34,7 +34,7 @@ const swaggerOptions = {
         name: "auth-token",
         bearerFormat: "JWT",
       },
-    }
+    },
   },
   apis: ['app.js', './routes/index.js', './routes/api/*.js'],
 };
