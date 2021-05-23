@@ -32,7 +32,7 @@ const {
  *     tags:
  *       - products
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - in: body
  *         name: product
@@ -89,7 +89,7 @@ const {
  *     tags:
  *       - products
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -114,7 +114,7 @@ const {
  *     tags:
  *       - products
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path

@@ -22,7 +22,7 @@ const {
  *     tags:
  *       - favourites
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all favourite products
@@ -37,7 +37,7 @@ const {
  *     tags:
  *       - favourites
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - in: body
  *         name: favourite
@@ -67,7 +67,7 @@ const {
  *     tags:
  *       - favourites
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -92,7 +92,7 @@ const {
  *     tags:
  *       - favourites
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path

@@ -23,7 +23,7 @@ const {
  *     tags:
  *       - roles
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all roles
@@ -40,7 +40,7 @@ const {
  *     tags:
  *       - roles
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - in: body
  *         name: role
@@ -69,7 +69,7 @@ const {
  *     tags:
  *       - roles
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -96,7 +96,7 @@ const {
  *     tags:
  *       - roles
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -123,7 +123,7 @@ const {
  *     tags:
  *       - roles
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path

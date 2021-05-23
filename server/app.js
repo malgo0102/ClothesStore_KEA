@@ -31,6 +31,7 @@ const swaggerOptions = {
         scheme: "bearer",
         description: "Enter JWT Bearer token **_only_**",
         in: "header",
+        name: "auth-token",
         bearerFormat: "JWT",
       },
     }

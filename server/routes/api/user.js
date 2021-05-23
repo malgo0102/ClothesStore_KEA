@@ -24,7 +24,7 @@ const {
  *     tags:
  *       - users
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
@@ -42,7 +42,7 @@ const {
  *     tags:
  *       - users
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -69,7 +69,7 @@ const {
  *     tags:
  *       - users
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path

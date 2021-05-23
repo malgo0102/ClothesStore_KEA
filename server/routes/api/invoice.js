@@ -21,7 +21,7 @@ const {
  *     tags:
  *       - invoices
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all invoices
@@ -89,7 +89,7 @@ const {
  *     tags:
  *       - invoices
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path

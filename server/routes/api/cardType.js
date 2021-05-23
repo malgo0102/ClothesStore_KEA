@@ -32,7 +32,7 @@ const {
  *     tags:
  *       - cards
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - in: body
  *         name: cardType
@@ -90,7 +90,7 @@ const {
  *     tags:
  *       - cards
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -115,7 +115,7 @@ const {
  *     tags:
  *       - cards
  *     security:
- *       bearerAuth: []
+ *       -   bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
