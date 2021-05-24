@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
     }
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(err);
+    console.log('Swagger token error');
   }
 
   if (!token) {

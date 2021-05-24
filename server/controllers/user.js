@@ -28,28 +28,57 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getUsersWithView = async (req, res) => {
+// Gets only non-safety-violating user information of employees and customers for employees
+export const getUsersInfoForEmployees = async (req, res) => {
   try {
-    const query = 'SELECT * FROM v_users';
-
-    await dbConfig.Sequelize.query(query, { type: dbConfig.Sequelize.QueryTypes.SELECT })
+    await dbConfig.User.findAll({
+      where: {
+        [dbConfig.Op.or]: [
+          { role_id: 3 },
+          { role_id: 2 },
+        ],
+      },
+      attributes: [
+        'first_name',
+        'last_name',
+        'email',
+      ],
+    })
       .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
+      .catch(err => res.send(err));
   } catch (err) {
-    console.log(err);
     return res.status(500).json('Internal server error');
   }
 };
 
-export const getUsersInfoWithView = async (req, res) => {
+// Gets user information of employees and customers for the admin
+export const getUsersInfoForAdmin = async (req, res) => {
   try {
-    const query = 'SELECT * FROM v_users_info';
-
-    await dbConfig.Sequelize.query(query, { type: dbConfig.Sequelize.QueryTypes.SELECT })
+    await dbConfig.User.findAll({
+      where: {
+        [dbConfig.Op.or]: [
+          { role_id: 3 },
+          { role_id: 2 },
+        ],
+      },
+      attributes: [
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'date_joined',
+        'last_active',
+      ],
+      include: [{
+        model: dbConfig.Role,
+        attributes: [
+          ['name', 'role'],
+        ],
+      }],
+    })
       .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
+      .catch(err => res.send(err));
   } catch (err) {
-    console.log(err);
     return res.status(500).json('Internal server error');
   }
 };

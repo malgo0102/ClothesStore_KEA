@@ -138,12 +138,41 @@ const {
  *         description: Forbidden, no token provided
  *       '500':
  *         description: Internal server error
+* /api/invoices/{from_date}/{to_date}:
+ *   get:
+ *     description: Use to request all invoices between two dates (invoices on dates included)
+ *     tags:
+ *       - invoices
+ *     security:
+ *       -   bearerAuth: []
+ *     parameters:
+ *       - name: from_date
+ *         in: path
+ *         required: true
+ *         description: The start date of the period
+ *         schema:
+ *           type: string
+ *       - name: to_date
+ *         in: path
+ *         required: true
+ *         description: The end date of the period
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned invoices between dates
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided
+ *       '500':
+ *         description: Internal server error
  */
 
 router.get('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoice]);
-router.get('/:from_date/:to_date', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoicesBetweenDatesWithProcedure]);
 router.get('/userOrders/:id', [authParams.verifyIdParam, authJwt.verifyToken, getUserOrdersWithProcedure]);
+router.get('/:from_date/:to_date', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoicesBetweenDatesWithProcedure]);
 router.post('/', addInvoice);
 
 module.exports = router;
