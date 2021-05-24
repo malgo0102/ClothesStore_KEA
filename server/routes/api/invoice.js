@@ -111,12 +111,39 @@ const {
  *         description: Forbidden, no token provided or require admin role
  *       '500':
  *         description: Internal server error
+* /api/invoices/userOrders/{id}:
+ *   get:
+ *     description: Use to request orders of a specific user
+ *     tags:
+ *       - invoices
+ *       - users
+ *     security:
+ *       -   bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to return
+ *         schema:
+ *           type: integer
+ *           format: int64
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned invoices for specific user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided
+ *       '500':
+ *         description: Internal server error
  */
 
 router.get('/', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getAllInvoices]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoice]);
 router.get('/:from_date/:to_date', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getInvoicesBetweenDatesWithProcedure]);
-router.get('/orders/:id', [authParams.verifyIdParam, authJwt.verifyToken, getUserOrdersWithProcedure]);
+router.get('/userOrders/:id', [authParams.verifyIdParam, authJwt.verifyToken, getUserOrdersWithProcedure]);
 router.post('/', addInvoice);
 
 module.exports = router;
