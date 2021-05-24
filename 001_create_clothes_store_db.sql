@@ -3,41 +3,39 @@ CREATE DATABASE IF NOT EXISTS clothes_store;
 
 USE clothes_store;
 
-CREATE TABLE brands (
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
+CREATE TABLE IF NOT EXISTS brands (
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
   name VARCHAR(120) NOT NULL UNIQUE,
   description VARCHAR(255) NOT NULL,
 
   PRIMARY KEY (id)
 );
 
-CREATE TABLE products (
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
-  brand_id INT,
+CREATE TABLE IF NOT EXISTS products (
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
+  brand_id INT(11),
   name VARCHAR(120) NOT NULL UNIQUE,
   unit_price FLOAT(11) NOT NULL,
   description VARCHAR(255) NOT NULL,
   size VARCHAR(120) NOT NULL,
 
-  PRIMARY KEY (id),
-  FOREIGN KEY (brand_id) REFERENCES brands(id)
-       ON DELETE CASCADE
+  PRIMARY KEY (id)
 );
 
-CREATE TABLE roles (
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
+CREATE TABLE IF NOT EXISTS roles (
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
   name VARCHAR(120) NOT NULL UNIQUE,
 
   PRIMARY KEY (id)
 );
 
-CREATE TABLE users (
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
-  role_id INT NOT NULL,
+CREATE TABLE IF NOT EXISTS users (
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
+  role_id INT(11) NOT NULL,
   first_name VARCHAR(120) NOT NULL,
   last_name VARCHAR(120) NOT NULL,
-  email VARCHAR(120) NOT NULL UNIQUE,
   password VARCHAR(120) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
   date_joined DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   last_active DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
 
@@ -46,17 +44,17 @@ CREATE TABLE users (
         ON DELETE CASCADE
 );
 
-CREATE TABLE card_types (
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
+CREATE TABLE IF NOT EXISTS card_types (
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
   name VARCHAR(120) UNIQUE NOT NULL,
 
   PRIMARY KEY (id)
 );
 
-CREATE TABLE invoices(
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
-  card_type_id INT NOT NULL,
-  card_number INT NOT NULL,
+CREATE TABLE IF NOT EXISTS invoices(
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
+  card_type_id INT(11) NOT NULL,
+  card_number INT(16) NOT NULL,
   card_holder VARCHAR(120) NOT NULL,
   date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   total_price FLOAT(11) NOT NULL,
@@ -66,13 +64,13 @@ CREATE TABLE invoices(
         ON DELETE CASCADE
 );
 
-CREATE TABLE cart_items (
-  id INT AUTO_INCREMENT NOT NULL UNIQUE,
-  user_id INT NOT NULL,
-  product_id INT NOT NULL,
-  invoice_id INT NOT NULL,
-  quantity INT NOT NULL,
-  unit_price FLOAT NOT NULL,
+CREATE TABLE IF NOT EXISTS cart_items (
+  id INT(11) AUTO_INCREMENT NOT NULL UNIQUE,
+  user_id INT(11) NOT NULL,
+  product_id INT(11) NOT NULL,
+  invoice_id INT(11) NOT NULL,
+  quantity INT(11) NOT NULL,
+  unit_price FLOAT(11) NOT NULL,
 
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users(id)
@@ -80,20 +78,47 @@ CREATE TABLE cart_items (
   FOREIGN KEY (product_id) REFERENCES products(id)
         ON DELETE CASCADE,
   FOREIGN KEY (invoice_id) REFERENCES invoices(id)
-	      ON DELETE CASCADE
+	ON DELETE CASCADE
 
 );
 
-
-CREATE TABLE favourite_products (
-  product_id INT NOT NULL,
-  user_id INT NOT NULL,
+CREATE TABLE IF NOT EXISTS favourite_products (
+  product_id INT(11) NOT NULL,
+  user_id INT(11) NOT NULL,
 
   PRIMARY KEY (product_id, user_id),
   FOREIGN KEY (product_id) REFERENCES products(id)
        ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id)
        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS audit_users (
+  OLD_id INT(11),
+  OLD_first_name VARCHAR(120),
+  OLD_last_name VARCHAR(120),
+  OLD_email VARCHAR(120),
+  NEW_id INT(11),
+  NEW_first_name VARCHAR(120),
+  NEW_last_name VARCHAR(120),
+  NEW_email VARCHAR(120),
+  action_type VARCHAR(120),
+  action_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS audit_invoices (
+  OLD_id INT(11),
+  OLD_card_type_id INT(11),
+  OLD_card_number INT(16),
+  OLD_card_holder VARCHAR(120),
+  OLD_total_price FLOAT(11),
+  NEW_id INT(11),
+  NEW_card_type_id INT(11),
+  NEW_card_number INT(16),
+  NEW_card_holder VARCHAR(120),
+  NEW_total_price FLOAT(11),
+  action_type VARCHAR(120),
+  action_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -105,15 +130,3 @@ TO admin@localhost;
 
 SELECT user FROM mysql.user;
 
-# TRIGGERS
-DELIMITER
-$$
-    CREATE TRIGGER brands_before_delete
-        AFTER DELETE ON brands
-            FOR EACH ROW
-            BEGIN
-                UPDATE products
-                    SET products.brand_id = NULL
-                    WHERE brand_id = OLD.id;
-            END $$
-DELIMITER ;

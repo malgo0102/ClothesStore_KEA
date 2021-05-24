@@ -1,8 +1,9 @@
+# POPULATING DATA
 # users passwords before hashing:
-# 1. JaJiPass
-# 2. BoBaPass
-# 3. JaJo
-# 4. JaBo
+# 1. JaJiPass - ADMIN
+# 2. BoBaPass - EMPLOYEE
+# 3. JaJo - CUSTOMER
+# 4. JaBo - CUSTOMER
 
 USE clothes_store;
 
