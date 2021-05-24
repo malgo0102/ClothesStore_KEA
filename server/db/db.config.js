@@ -8,6 +8,8 @@ import Product from '../models/Product';
 import Role from '../models/Role';
 import User from '../models/User';
 
+const { Op } = require('sequelize');
+
 Brand.hasMany(Product, {
   foreignKey: 'brand_id',
 });
@@ -53,6 +55,7 @@ FavouriteProduct.belongsTo(Product, {
 
 const dbConfig = {
   Sequelize: sequelize,
+  Op,
   Brand,
   Product,
   Role,

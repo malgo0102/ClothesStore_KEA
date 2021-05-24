@@ -25,6 +25,31 @@ const getProduct = async (req, res) => {
   }
 };
 
+// Gets only relevant products data for users to purchase products
+const getProductsForUsers = async (req, res) => {
+  try {
+    await dbConfig.Product.findAll({
+      attributes: [
+        ['name', 'product_name'],
+        'unit_price',
+        ['description', 'product_description'],
+        'size',
+      ],
+      include: [{
+        model: dbConfig.Brand,
+        attributes: [
+          ['name', 'brand_name'],
+          ['description', 'brand_description'],
+        ],
+      }],
+    })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
 const addProduct = asyncHandler(async (req, res) => {
   try {
     await dbConfig.Product.create(req.body)
@@ -65,6 +90,7 @@ const deleteProduct = async (req, res) => {
 
 module.exports.getAllProducts = getAllProducts;
 module.exports.getProduct = getProduct;
+module.exports.getProductsForUsers = getProductsForUsers;
 module.exports.addProduct = addProduct;
 module.exports.updateProduct = updateProduct;
 module.exports.deleteProduct = deleteProduct;
