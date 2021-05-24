@@ -18,7 +18,6 @@ const getAllBrands = async (req, res) => {
 
 const getBrand = async (req, res) => {
   try {
-    console.log("yello");
     await dbConfig.Brand.findByPk(req.params.id)
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));

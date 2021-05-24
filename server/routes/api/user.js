@@ -26,7 +26,7 @@ const {
  *     tags:
  *       - users
  *     security:
- *       -   bearerAuth: []
+ *       - bearerAuth: []
  *     responses:
  *       '200':
  *         description: A successful response, returned all users
@@ -35,7 +35,7 @@ const {
  *       '403':
  *         description: Forbidden, no token provided or require admin role
  *       '404':
- *         description: Page not found
+ *         description: Page ot found
  *       '500':
  *         description: Internal server error
  * /api/users/{id}:
@@ -62,6 +62,42 @@ const {
  *         description: Unauthorized
  *       '403':
  *         description: Forbidden, no token provided or requires employee or admin role
+ *       '404':
+ *         description: Page not found
+ *       '500':
+ *         description: Internal server error
+ * /api/users/views/users:
+ *   get:
+ *     description: Use to request all names and emails of all users that are customers or employees
+ *     tags:
+ *       - users
+ *     security:
+ *       -   bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned user
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or requires employee or admin role
+ *       '404':
+ *         description: Page not found
+ *       '500':
+ *         description: Internal server error
+ * /api/users/views/usersInfo:
+ *   get:
+ *     description: Use to request all info of all users that are customers or employees
+ *     tags:
+ *       - users
+ *     security:
+ *       -   bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned user
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or requires admin role
  *       '404':
  *         description: Page not found
  *       '500':

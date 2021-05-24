@@ -21,10 +21,6 @@ const Product = sequelize.define('Product', {
     type: FLOAT,
     allowNull: false,
   },
-  rating: {
-    type: INTEGER,
-    allowNull: false,
-  },
   description: {
     type: STRING,
     allowNull: false,

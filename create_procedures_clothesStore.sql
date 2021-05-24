@@ -16,7 +16,7 @@ DELIMITER $$
     CREATE PROCEDURE get_user_orders(user_id INT)
         BEGIN
             SELECT products.name, products.description, products.size,
-                   products.rating, brands.name, cart_items.quantity,
+                   brands.name, cart_items.quantity,
                    cart_items.unit_price, (cart_items.quantity * cart_items.unit_price) AS total_price, invoices.date
             FROM users
             INNER JOIN cart_items ON users.id = cart_items.user_id
