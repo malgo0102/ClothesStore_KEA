@@ -14,6 +14,7 @@ const app = express();
 // Define configuration object
 const swaggerOptions = {
   swaggerDefinition: {
+    openapi: '3.0.1',
     info: {
       title: 'Clothes store API',
       description: 'Web app for clothes shop management and clothes purchases',
@@ -23,16 +24,16 @@ const swaggerOptions = {
       },
       servers: ['http://localhost:8080'],
     },
-  },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-        description: "Enter JWT Bearer token **_only_**",
-        in: "header",
-        name: "auth-token",
-        bearerFormat: "JWT",
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'Bearer',
+          description: 'Enter JWT Bearer token **_only_**',
+          in: 'header',
+          name: 'auth-token',
+          bearerFormat: 'JWT',
+        },
       },
     },
   },

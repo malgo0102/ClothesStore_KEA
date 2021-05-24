@@ -45,7 +45,7 @@ UPDATE users
     WHERE id = 2;
 
 UPDATE products
-    SET name = 'Black Cardigan', unit_price = 1100, rating = 3
+    SET name = 'Black Cardigan', unit_price = 1100
     WHERE id = 2;
 
 # Delete queries
