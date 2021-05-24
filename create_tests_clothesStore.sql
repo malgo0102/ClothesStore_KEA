@@ -9,6 +9,9 @@ SELECT * FROM card_types;
 SELECT * FROM invoices;
 SELECT * FROM cart_items;
 SELECT * FROM favourite_products;
+SELECT * FROM audit_invoices;
+SELECT * FROM audit_users;
+
 
 # Get products of selected brand
 SELECT * FROM products WHERE brand_id = (SELECT id FROM brands WHERE name = 'Zara');

@@ -6,8 +6,8 @@ DROP PROCEDURE IF EXISTS get_user_orders;
 DELIMITER $$
     CREATE PROCEDURE get_orders_between_dates(from_date DATETIME, to_date DATETIME)
         BEGIN
-            SELECT card_type_id, card_number, card_holder, date, total_price
-            FROM invoices
+            SELECT *
+            FROM v_invoices
             WHERE date >= from_date AND date <= to_date;
         END $$
 DELIMITER ;
