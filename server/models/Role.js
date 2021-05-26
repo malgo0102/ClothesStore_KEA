@@ -9,7 +9,10 @@ const Role = sequelize.define('Role', {
   name: {
     type: STRING,
     allowNull: false,
-    unique: true,
+    unique: {
+      args: 'name',
+      msg: 'This role name is already taken!',
+    },
   },
 }, {
   tableName: 'roles', // which table to map the sequelize model object to

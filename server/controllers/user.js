@@ -6,24 +6,67 @@ const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+// Gets all users' data and shows their respective role name instead of the role_id
 export const getAllUsers = async (req, res) => {
   try {
-    await dbConfig.User.findAll()
+    await dbConfig.User.findAll({
+      where: {
+        [dbConfig.Op.or]: [
+          { role_id: 3 },
+          { role_id: 2 },
+        ],
+      },
+      attributes: [
+        'id',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'date_joined',
+        'last_active',
+      ],
+      include: [{
+        model: dbConfig.Role,
+        attributes: [
+          ['name', 'role'],
+        ],
+      }],
+    })
       .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
+      .catch(err => res.send(err));
   } catch (err) {
-    console.log(err);
     return res.status(500).json('Internal server error');
   }
 };
 
+// Don't really need anymore; getUsersInfoForAdmin does a better job
 export const getUser = async (req, res) => {
   try {
     await dbConfig.User.findByPk(req.params.id)
       .then(data => res.status(200).json(data))
       .catch(err => res.status(404).send(err));
   } catch (err) {
-    console.log(err);
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// Only gets information about the current user profile
+export const getUserProfile = async (req, res) => {
+  try {
+    await dbConfig.User.findByPk(
+      req.params.id,
+      {
+        attributes: [
+          'first_name',
+          'last_name',
+          'email',
+          'password',
+        ],
+      },
+    )
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
     return res.status(500).json('Internal server error');
   }
 };
@@ -51,38 +94,6 @@ export const getUsersInfoForEmployees = async (req, res) => {
   }
 };
 
-// Gets user information of employees and customers for the admin
-export const getUsersInfoForAdmin = async (req, res) => {
-  try {
-    await dbConfig.User.findAll({
-      where: {
-        [dbConfig.Op.or]: [
-          { role_id: 3 },
-          { role_id: 2 },
-        ],
-      },
-      attributes: [
-        'first_name',
-        'last_name',
-        'email',
-        'password',
-        'date_joined',
-        'last_active',
-      ],
-      include: [{
-        model: dbConfig.Role,
-        attributes: [
-          ['name', 'role'],
-        ],
-      }],
-    })
-      .then(data => res.status(200).json(data))
-      .catch(err => res.send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-};
-
 export const deleteUser = async (req, res) => {
   try {
     await dbConfig.User.destroy({
@@ -92,6 +103,20 @@ export const deleteUser = async (req, res) => {
     })
       .then(data => res.status(204).json(data))
       .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    await dbConfig.User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then(() => res.status(200).json())
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

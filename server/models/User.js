@@ -23,7 +23,10 @@ const User = sequelize.define('User', {
   email: {
     type: STRING,
     allowNull: false,
-    unique: true,
+    unique: {
+      args: 'name',
+      msg: 'This email is already taken!',
+    },
   },
   password: {
     type: STRING,

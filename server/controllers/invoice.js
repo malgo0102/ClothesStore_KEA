@@ -7,19 +7,23 @@ import dbConfig from '../db/db.config';
 
 const asyncHandler = require('express-async-handler');
 
+// Gets only invoices data without ids; card_type_id is replaced with its respective card type name
 const getAllInvoices = async (req, res) => {
   try {
-    await dbConfig.Invoice.findAll()
-      .then(data => res.status(200).json(data))
-      .catch(err => res.send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-};
-
-const getInvoice = async (req, res) => {
-  try {
-    await dbConfig.Invoice.findByPk(req.params.id)
+    await dbConfig.Invoice.findAll({
+      attributes: [
+        'card_holder',
+        'card_number',
+        'total_price',
+        'date',
+      ],
+      include: [{
+        model: dbConfig.CardType,
+        attributes: [
+          ['name', 'card_type'],
+        ],
+      }],
+    })
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));
   } catch (err) {
@@ -34,6 +38,17 @@ const getUserOrdersWithProcedure = async (req, res) => {
     await dbConfig.Sequelize.query(query, { replacements: { user_id: req.params.id } })
       .then(data => res.status(200).json(data))
       .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// TO-DO: Delete? Don't really care about single invoice information
+const getInvoice = async (req, res) => {
+  try {
+    await dbConfig.Invoice.findByPk(req.params.id)
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

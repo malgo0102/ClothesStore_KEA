@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS audit_users (
   NEW_first_name VARCHAR(120),
   NEW_last_name VARCHAR(120),
   NEW_email VARCHAR(120),
+  user VARCHAR(120),
   action_type VARCHAR(120),
   action_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -117,6 +118,7 @@ CREATE TABLE IF NOT EXISTS audit_invoices (
   NEW_card_number INT(16),
   NEW_card_holder VARCHAR(120),
   NEW_total_price FLOAT(11),
+  user VARCHAR(120),
   action_type VARCHAR(120),
   action_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
