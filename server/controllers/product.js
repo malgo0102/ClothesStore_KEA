@@ -30,6 +30,7 @@ const getProductsForUsers = async (req, res) => {
   try {
     await dbConfig.Product.findAll({
       attributes: [
+        'id',
         ['name', 'product_name'],
         'unit_price',
         ['description', 'product_description'],
