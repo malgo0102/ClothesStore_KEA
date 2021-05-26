@@ -1,8 +1,9 @@
 USE clothes_store;
 
 CREATE VIEW v_users AS
-    SELECT first_name, last_name, email, date_joined, last_active
+    SELECT first_name, last_name, email, roles.name AS role
     FROM users
+    INNER JOIN roles ON users.role_id = roles.id
     WHERE role_id = 3 OR role_id = 2;
 
 CREATE VIEW v_users_info AS

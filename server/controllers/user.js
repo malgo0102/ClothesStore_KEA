@@ -86,6 +86,12 @@ export const getUsersInfoForEmployees = async (req, res) => {
         'last_name',
         'email',
       ],
+      include: [{
+        model: dbConfig.Role,
+        attributes: [
+          ['name', 'role'],
+        ],
+      }],
     })
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));
