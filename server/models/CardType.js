@@ -6,7 +6,10 @@ const CardType = sequelize.define('CardType', {
   name: {
     type: String,
     allowNull: false,
-    unique: true,
+    unique: {
+      args: 'name',
+      msg: 'This card type name is already taken!',
+    },
   },
 }, {
   tableName: 'card_types', // which table to map the sequelize model object to

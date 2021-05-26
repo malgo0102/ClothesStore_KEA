@@ -12,7 +12,6 @@ const {
   getAllUsers,
   getUser,
   getUsersInfoForEmployees,
-  getUsersInfoForAdmin,
   getUserProfile,
   signInUser,
   signUpUser,
@@ -166,24 +165,6 @@ const {
  *         description: Page not found
  *       '500':
  *         description: Internal server error
- * /api/users/views/usersInfo:
- *   get:
- *     description: Use to request all info of all users that are customers or employees
- *     tags:
- *       - users
- *     security:
- *       -   bearerAuth: []
- *     responses:
- *       '200':
- *         description: A successful response, returned user
- *       '401':
- *         description: Unauthorized
- *       '403':
- *         description: Forbidden, no token provided or requires admin role
- *       '404':
- *         description: Page not found
- *       '500':
- *         description: Internal server error
  * /api/users/signup:
  *   post:
  *     description: Use to add new user
@@ -254,7 +235,6 @@ const {
 router.get('/', [authJwt.verifyToken, authJwt.isAdmin, getAllUsers]);
 router.get('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getUser]);
 router.get('/views/users', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getUsersInfoForEmployees]);
-router.get('/views/usersinfo', [authJwt.verifyToken, authJwt.isAdmin, getUsersInfoForAdmin]);
 router.post('/signup', [authVerification.verifyNewUser, signUpUser]);
 router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteUser]);
 router.put('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, updateUser]);

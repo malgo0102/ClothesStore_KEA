@@ -6,76 +6,8 @@ const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+// Gets all users' data and shows their respective role name instead of the role_id
 export const getAllUsers = async (req, res) => {
-  try {
-    await dbConfig.User.findAll()
-      .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json('Internal server error');
-  }
-};
-
-// Don't really need anymore; getUsersInfoForAdmin does a better job
-export const getUser = async (req, res) => {
-  try {
-    await dbConfig.User.findByPk(req.params.id)
-      .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json('Internal server error');
-  }
-};
-
-// Only gets information about the current user profile
-export const getUserProfile = async (req, res) => {
-  try {
-    await dbConfig.User.findByPk(
-      req.params.id,
-      {
-        attributes: [
-          'first_name',
-          'last_name',
-          'email',
-          'password',
-        ],
-      },
-    )
-      .then(data => res.status(200).json(data))
-      .catch(err => res.status(404).send(err));
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json('Internal server error');
-  }
-};
-
-// Gets only non-safety-violating user information of employees and customers for employees
-export const getUsersInfoForEmployees = async (req, res) => {
-  try {
-    await dbConfig.User.findAll({
-      where: {
-        [dbConfig.Op.or]: [
-          { role_id: 3 },
-          { role_id: 2 },
-        ],
-      },
-      attributes: [
-        'first_name',
-        'last_name',
-        'email',
-      ],
-    })
-      .then(data => res.status(200).json(data))
-      .catch(err => res.send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-};
-
-// Gets user information of employees and customers for the admin
-export const getUsersInfoForAdmin = async (req, res) => {
   try {
     await dbConfig.User.findAll({
       where: {
@@ -99,6 +31,61 @@ export const getUsersInfoForAdmin = async (req, res) => {
           ['name', 'role'],
         ],
       }],
+    })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// Don't really need anymore; getUsersInfoForAdmin does a better job
+export const getUser = async (req, res) => {
+  try {
+    await dbConfig.User.findByPk(req.params.id)
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// Only gets information about the current user profile
+export const getUserProfile = async (req, res) => {
+  try {
+    await dbConfig.User.findByPk(
+      req.params.id,
+      {
+        attributes: [
+          'first_name',
+          'last_name',
+          'email',
+          'password',
+        ],
+      },
+    )
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// Gets only non-safety-violating user information of employees and customers for employees
+export const getUsersInfoForEmployees = async (req, res) => {
+  try {
+    await dbConfig.User.findAll({
+      where: {
+        [dbConfig.Op.or]: [
+          { role_id: 3 },
+          { role_id: 2 },
+        ],
+      },
+      attributes: [
+        'first_name',
+        'last_name',
+        'email',
+      ],
     })
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));

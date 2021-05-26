@@ -11,7 +11,7 @@ const Brand = sequelize.define('Brand', {
     allowNull: false,
     unique: {
       args: 'name',
-      msg: 'This name is already taken!',
+      msg: 'This brand name is already taken!',
     },
   },
   description: {

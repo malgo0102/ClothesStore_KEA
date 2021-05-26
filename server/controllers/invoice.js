@@ -7,30 +7,8 @@ import dbConfig from '../db/db.config';
 
 const asyncHandler = require('express-async-handler');
 
+// Gets only invoices data without ids; card_type_id is replaced with its respective card type name
 const getAllInvoices = async (req, res) => {
-  try {
-    await dbConfig.Invoice.findAll()
-      .then(data => res.status(200).json(data))
-      .catch(err => res.send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-};
-
-// TO-DO: Delete? Don't really care about single invoice information
-const getInvoice = async (req, res) => {
-  try {
-    await dbConfig.Invoice.findByPk(req.params.id)
-      .then(data => res.status(200).json(data))
-      .catch(err => res.send(err));
-  } catch (err) {
-    return res.status(500).json('Internal server error');
-  }
-};
-
-// TO-DO: Replace getAllInvoices? Also, add to router
-// Gets only invoices data without ids and card_type_id replaced with its respective card type name
-const getInvoicesInfo = async (req, res) => {
   try {
     await dbConfig.Invoice.findAll({
       attributes: [
@@ -60,6 +38,17 @@ const getUserOrdersWithProcedure = async (req, res) => {
     await dbConfig.Sequelize.query(query, { replacements: { user_id: req.params.id } })
       .then(data => res.status(200).json(data))
       .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// TO-DO: Delete? Don't really care about single invoice information
+const getInvoice = async (req, res) => {
+  try {
+    await dbConfig.Invoice.findByPk(req.params.id)
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }
@@ -133,7 +122,6 @@ const addInvoice = asyncHandler(async (req, res) => {
 
 module.exports.getAllInvoices = getAllInvoices;
 module.exports.getInvoice = getInvoice;
-module.exports.getInvoicesInfo = getInvoicesInfo;
 module.exports.getUserOrdersWithProcedure = getUserOrdersWithProcedure;
 module.exports.getInvoicesBetweenDatesWithProcedure = getInvoicesBetweenDatesWithProcedure;
 module.exports.addInvoice = addInvoice;

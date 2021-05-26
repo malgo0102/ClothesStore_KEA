@@ -30,7 +30,7 @@ const {
  *       '401':
  *         description: Unauthorized
  *       '403':
- *         description: Forbidden, no token provided or require employee or admin role
+ *         description: Forbidden, no token provided or requires employee or admin role
  *       '500':
  *         description: Internal server error
  *   post:
