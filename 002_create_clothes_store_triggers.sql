@@ -24,6 +24,7 @@ $$
                         NULL, NULL, NULL, NULL, NULL,
                         NEW.id, NEW.card_type_id, NEW.card_number,
                         NEW.card_holder, NEW.total_price,
+                        user(),
                         'INSERT', NOW()
                 );
             END $$
@@ -41,6 +42,7 @@ $$
                         OLD.card_holder, OLD.total_price,
                         NEW.id, NEW.card_type_id, NEW.card_number,
                         NEW.card_holder, NEW.total_price,
+                        user(),
                         'UPDATE', NOW()
                 );
             END $$
@@ -57,6 +59,7 @@ $$
                         OLD.id, OLD.card_type_id, OLD.card_number,
                         OLD.card_holder, OLD.total_price,
                         NULL, NULL, NULL, NULL, NULL,
+                        user(),
                         'DELETE', NOW()
                 );
             END $$
@@ -74,6 +77,7 @@ $$
                         null, null,
                         NEW.id, NEW.first_name,
                         NEW.last_name, NEW.email,
+                        user(),
                         'INSERT', NOW()
                 );
             END $$
@@ -91,6 +95,7 @@ $$
                         OLD.last_name, OLD.email,
                         NEW.id, NEW.first_name,
                         NEW.last_name, NEW.email,
+                        user(),
                         'UPDATE', NOW()
                 );
             END $$
@@ -108,6 +113,7 @@ $$
                         OLD.last_name, OLD.email,
                         null, null,
                         null, null,
+                        user(),
                         'DELETE', NOW()
                 );
             END $$

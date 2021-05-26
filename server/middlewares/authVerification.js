@@ -3,6 +3,10 @@
 /* eslint-disable max-len */
 import dbConfig from '../db/db.config';
 
+// TO-DO: Implement same concept for creating new
+// Brands,
+// Roles
+// and CardTypes
 const verifyExistingUser = (req, res, next) => {
   dbConfig.User.findOne({
     where: {
@@ -18,6 +22,10 @@ const verifyExistingUser = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
+// TO-DO: Implement same concept for creating new
+// Brands,
+// Roles
+// and CardTypes
 const verifyNewUser = (req, res, next) => {
   dbConfig.User.findOne({
     where: {

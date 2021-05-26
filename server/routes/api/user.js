@@ -13,9 +13,11 @@ const {
   getUser,
   getUsersInfoForEmployees,
   getUsersInfoForAdmin,
+  getUserProfile,
   signInUser,
   signUpUser,
   deleteUser,
+  updateUser,
 } = require('../../controllers/user');
 
 /**
@@ -66,6 +68,86 @@ const {
  *         description: Page not found
  *       '500':
  *         description: Internal server error
+ *   delete:
+ *     description: Use to delete user
+ *     tags:
+ *       - users
+ *     security:
+ *       -   bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to delete
+ *         schema:
+ *           type: integer
+ *           format: int64
+ *     responses:
+ *       '204':
+ *         description: No content, deleted user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided or require admin role
+ *       '404':
+ *         description: Page not found
+ *       '500':
+ *         description: Internal server error
+ *   put:
+ *     description: Use to update user
+ *     tags:
+ *       - users
+ *     security:
+ *       -   bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to update
+ *         schema:
+ *           type: integer
+ *           format: int64
+ *     responses:
+ *       '200':
+ *         description: A successful response, updated user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided
+ *       '500':
+ *         description: Internal server error
+ * /api/users/profile/{id}:
+ *   get:
+ *     description: Use to request user profile
+ *     tags:
+ *       - users
+ *     security:
+ *       -   bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the user to return
+ *         schema:
+ *           type: integer
+ *           format: int64
+ *     responses:
+ *       '200':
+ *         description: A successful response, returned user
+ *       '400':
+ *         description: Bad request, wrong id format
+ *       '401':
+ *         description: Unauthorized
+ *       '403':
+ *         description: Forbidden, no token provided
+ *       '404':
+ *         description: Page not found
+ *       '500':
+ *         description: Internal server error
  * /api/users/views/users:
  *   get:
  *     description: Use to request all names and emails of all users that are customers or employees
@@ -98,33 +180,6 @@ const {
  *         description: Unauthorized
  *       '403':
  *         description: Forbidden, no token provided or requires admin role
- *       '404':
- *         description: Page not found
- *       '500':
- *         description: Internal server error
- *   delete:
- *     description: Use to delete user
- *     tags:
- *       - users
- *     security:
- *       -   bearerAuth: []
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: The ID of the user to delete
- *         schema:
- *           type: integer
- *           format: int64
- *     responses:
- *       '204':
- *         description: No content, deleted user
- *       '400':
- *         description: Bad request, wrong id format
- *       '401':
- *         description: Unauthorized
- *       '403':
- *         description: Forbidden, no token provided or require admin role
  *       '404':
  *         description: Page not found
  *       '500':
@@ -202,11 +257,8 @@ router.get('/views/users', [authJwt.verifyToken, authJwt.isEmployeeOrAdmin, getU
 router.get('/views/usersinfo', [authJwt.verifyToken, authJwt.isAdmin, getUsersInfoForAdmin]);
 router.post('/signup', [authVerification.verifyNewUser, signUpUser]);
 router.delete('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, deleteUser]);
+router.put('/:id', [authParams.verifyIdParam, authJwt.verifyToken, authJwt.isAdmin, updateUser]);
+router.put('/profile/:id', [authParams.verifyIdParam, authJwt.verifyToken, getUserProfile]);
 router.post('/signin', [authVerification.verifyExistingUser, signInUser]);
-
-// TODO - put - updateUser (isAdmin) (with access to route) - update swagger
-// TODO - get - see user profile (with access to route) - update swagger
-// TODO - put - update user profile (with access to route) - update swagger
-// TODO - usersView and usersInfoView - update swagger
 
 module.exports = router;

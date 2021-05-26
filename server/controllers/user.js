@@ -17,9 +17,32 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+// Don't really need anymore; getUsersInfoForAdmin does a better job
 export const getUser = async (req, res) => {
   try {
     await dbConfig.User.findByPk(req.params.id)
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(404).send(err));
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// Only gets information about the current user profile
+export const getUserProfile = async (req, res) => {
+  try {
+    await dbConfig.User.findByPk(
+      req.params.id,
+      {
+        attributes: [
+          'first_name',
+          'last_name',
+          'email',
+          'password',
+        ],
+      },
+    )
       .then(data => res.status(200).json(data))
       .catch(err => res.status(404).send(err));
   } catch (err) {
@@ -62,6 +85,7 @@ export const getUsersInfoForAdmin = async (req, res) => {
         ],
       },
       attributes: [
+        'id',
         'first_name',
         'last_name',
         'email',
@@ -92,6 +116,20 @@ export const deleteUser = async (req, res) => {
     })
       .then(data => res.status(204).json(data))
       .catch(err => res.status(404).send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    await dbConfig.User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then(() => res.status(200).json())
+      .catch(err => res.send(err));
   } catch (err) {
     return res.status(500).json('Internal server error');
   }

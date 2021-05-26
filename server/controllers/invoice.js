@@ -17,9 +17,35 @@ const getAllInvoices = async (req, res) => {
   }
 };
 
+// TO-DO: Delete? Don't really care about single invoice information
 const getInvoice = async (req, res) => {
   try {
     await dbConfig.Invoice.findByPk(req.params.id)
+      .then(data => res.status(200).json(data))
+      .catch(err => res.send(err));
+  } catch (err) {
+    return res.status(500).json('Internal server error');
+  }
+};
+
+// TO-DO: Replace getAllInvoices? Also, add to router
+// Gets only invoices data without ids and card_type_id replaced with its respective card type name
+const getInvoicesInfo = async (req, res) => {
+  try {
+    await dbConfig.Invoice.findAll({
+      attributes: [
+        'card_holder',
+        'card_number',
+        'total_price',
+        'date',
+      ],
+      include: [{
+        model: dbConfig.CardType,
+        attributes: [
+          ['name', 'card_type'],
+        ],
+      }],
+    })
       .then(data => res.status(200).json(data))
       .catch(err => res.send(err));
   } catch (err) {
@@ -107,6 +133,7 @@ const addInvoice = asyncHandler(async (req, res) => {
 
 module.exports.getAllInvoices = getAllInvoices;
 module.exports.getInvoice = getInvoice;
+module.exports.getInvoicesInfo = getInvoicesInfo;
 module.exports.getUserOrdersWithProcedure = getUserOrdersWithProcedure;
 module.exports.getInvoicesBetweenDatesWithProcedure = getInvoicesBetweenDatesWithProcedure;
 module.exports.addInvoice = addInvoice;
