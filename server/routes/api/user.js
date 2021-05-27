@@ -170,29 +170,31 @@ const {
  *     description: Use to add new user
  *     tags:
  *       - users
- *     parameters:
- *       - in: body
- *         name: user
- *         description: The user to create
- *         schema:
- *           type: object
- *           required:
- *            - roleId
- *            - firstName
- *            - LastName
- *            - email
- *            - password
- *           properties:
- *             role_id:
- *               type: integer
- *             first_name:
- *               type: string
- *             last_name:
- *               type: string
- *             email:
- *               type: string
- *             password:
- *               type: string
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            name: user
+ *            description: The user to create
+ *            schema:
+ *              type: object
+ *              required:
+ *                - roleId
+ *                - firstName
+ *                - LastName
+ *                - email
+ *                - password
+ *              properties:
+ *                role_id:
+ *                  type: integer
+ *                first_name:
+ *                  type: string
+ *                last_name:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                password:
+ *                  type: string
  *     responses:
  *       '201':
  *         description: Created, added new user
@@ -207,20 +209,24 @@ const {
  *     description: Use to log in
  *     tags:
  *       - users
- *     parameters:
- *       - in: body
- *         name: user
- *         description: The user to signup
- *         schema:
- *           type: object
- *           required:
- *            - email
- *            - password
- *           properties:
- *             email:
- *               type: string
- *             password:
- *               type: string
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            name: user
+ *            description: The user to sign in
+ *            schema:
+ *              type: object
+ *              required:
+ *                - email
+ *                - password
+ *              properties:
+ *                email:
+ *                  type: string
+ *                  default: jamesjimick@mystore.com
+ *                password:
+ *                  type: string
+ *                  default: JaJiPass
  *     responses:
  *       '200':
  *         description: A successful response, user logged in

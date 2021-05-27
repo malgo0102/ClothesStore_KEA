@@ -36,28 +36,30 @@ const {
  *       - products
  *     security:
  *       -   bearerAuth: []
- *     parameters:
- *       - in: body
- *         name: product
- *         description: The product to create
- *         schema:
- *           type: object
- *           required:
- *             - brand_id
- *             - name
- *             - unit_price
- *             - size
- *           properties:
- *             brand_id:
- *               type: integer
- *             name:
- *               type: string
- *             unit_price:
- *               type: number
- *             description:
- *               type: string
- *             size:
- *               type: string
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            name: product
+ *            description: The product to create
+ *            schema:
+ *              type: object
+ *              required:
+ *                - brand_id
+ *                - name
+ *                - unit_price
+ *                - size
+ *              properties:
+ *                brand_id:
+ *                  type: integer
+ *                name:
+ *                  type: string
+ *                unit_price:
+ *                  type: number
+ *                description:
+ *                  type: string
+ *                size:
+ *                  type: string
  *     responses:
  *       '201':
  *         description: Created, added new product
@@ -101,6 +103,35 @@ const {
  *         schema:
  *           type: integer
  *           format: int64
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            name: product
+ *            description: The product to create
+ *            schema:
+ *              type: object
+ *              required:
+ *                - brand_id
+ *                - name
+ *                - unit_price
+ *                - size
+ *              properties:
+ *                brand_id:
+ *                  type: integer
+ *                  default: 1
+ *                name:
+ *                  type: string
+ *                  default: Pink Skirt
+ *                unit_price:
+ *                  type: number
+ *                  default: 9999
+ *                description:
+ *                  type: string
+ *                  default: It's over 9000...in fact, it's 9999...
+ *                size:
+ *                  type: string
+ *                  default: M
  *     responses:
  *       '200':
  *         description: A successful response, updated product
