@@ -29,7 +29,7 @@ Welcome to the ClothesStore_KEA documentation. The application is not finished y
 2. Run `npm install` to install all dependencies
 3. Run `npm run start` to start the backend API server 
 4. Navigate to http://localhost:8080 for the api (e.g. http://localhost:8080/api/users to GET all users)
-5. Navigate to http://localhost:4200 for the client application ( Not yet implemented )
+5. Navigate to http://localhost:4200 for the client application
 
 **Testing the API**
 1. Navigate to http://localhost:8080/api-docs
